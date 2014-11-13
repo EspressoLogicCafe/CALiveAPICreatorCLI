@@ -9,6 +9,9 @@ module.exports = {
 	// Get the name of the dot directory.
 	getDotDirectory: function(createIfNotExists) {
 		var dotDirName = osenv.home() + "/.espresso";
+		if ( ! fs.existsSync(dotDirName)) {
+			fs.mkdirSync(dotDirName, 0700);
+		}
 		if ( ! fs.lstatSync(dotDirName).isDirectory()) {
 			throw "File " + dotDirName + " is not a directory!";
 		}
