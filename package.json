@@ -1,0 +1,17 @@
+{
+  "name": "EspressoCLI",
+  "version": "1.0.0",
+  "description": "The command line utility for Espresso Logic",
+  "main": "espresso.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "espresso",
+    "logic",
+    "command",
+    "line"
+  ],
+  "author": "Espresso Logic",
+  "license": "Apache"
+}
