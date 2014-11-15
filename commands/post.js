@@ -6,12 +6,26 @@ var dotfile = require('../util/dotfile.js');
 var printObject = require('../util/printObject.js');
 
 module.exports = {
-	commandPost: function (cmd, verb) {
+	commandPost: function (resource, cmd, verb) {
 		var client = new Client();
-		var url = dotfile.getCurrentServer();
-		var apiKey = dotfile.getApiKey(url);
-		if ( ! cmd.resource) {
-			console.log('Error: a resource or table name must be specified with the -r or --resource option'.red);
+		var url = null;
+		var apiKey = null;
+		if (cmd.serverAlias) {
+			var login = dotfile.getLoginForAlias(cmd.serverAlias);
+			if ( ! login) {
+				console.log(('Unknown alias: ' + cmd.serverAlias).red);
+				return;
+			}
+			url = login.url;
+			apiKey = login.loginInfo.apikey;
+		}
+		else {
+			var login = dotfile.getCurrentServer();
+			url = login.url;
+			apiKey = dotfile.getApiKey(login.url, login.userName);
+		}
+		if ( ! resource) {
+			console.log('Error: a resource or table name must be specified'.red);
 			return;
 		}
 		if ( ! cmd.json && !cmd.jsonfile) {
@@ -41,7 +55,7 @@ module.exports = {
 		}
 
 		var startTime = new Date();
-		client[verb](url + "/" + cmd.resource, {
+		client[verb](url + "/" + resource, {
 			data: cmd.json,
 			headers: {
 				Authorization: "Espresso " + apiKey + ":1"
@@ -55,12 +69,12 @@ module.exports = {
 				return;
 			}
 			var termWidth = 80;
-			if (process.stdout.getWindowSize) {
+			if (process.stdout.getWindowSize) { // May be null if output is redirected
 				termWidth = process.stdout.getWindowSize()[0];
 			}
 
 			if (!cmd.format || cmd.format === "text") {
-				var header = verb.toUpperCase() + " for " + cmd.resource + ": ";
+				var header = verb.toUpperCase() + " for " + resource + ": ";
 				while (header.length < termWidth )
 					header += " ";
 				console.log(header.bgWhite.blue);

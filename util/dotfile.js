@@ -10,12 +10,6 @@ module.exports = {
 	getDotDirectory: function(createIfNotExists) {
 		var dotDirName = osenv.home() + "/.espresso";
 		if ( ! fs.existsSync(dotDirName)) {
-			fs.mkdirSync(dotDirName, 0700);
-		}
-		if ( ! fs.lstatSync(dotDirName).isDirectory()) {
-			throw "File " + dotDirName + " is not a directory!";
-		}
-		if ( ! fs.existsSync(dotDirName)) {
 			if (createIfNotExists) {
 				fs.mkdirSync(dotDirName, 0700);
 				return dotDirName;
@@ -30,34 +24,47 @@ module.exports = {
 	// Write the given data to the dot file with the given URL
 	writeToDotFile: function(name, data) {
 		var dotDirName = this.getDotDirectory(true);
-		var dotFileName = dotDirName + "/" + querystring.escape(name);
+		var dotFileName = dotDirName + "/" + querystring.escape(name) + "--" + data.userName;
 		var dotFile = fs.openSync(dotFileName, 'w', 0600);
 		fs.writeSync(dotFile, JSON.stringify(data, null, 2));
 	},
 	
-	deleteDotFile: function(name) {
-		var dotDirName = this.getDotDirectory(true);
-		var dotFileName = dotDirName + "/" + querystring.escape(name);
-		fs.unlinkSync(dotFileName);
-	},
-	
-	deleteDotFileForAlias: function(alias) {
-		var dotFile = this.getDotFileForAlias(alias);
-		if ( ! dotFile) {
-			console.log(('Unknown alias: ' + alias).red);
-			return;
-		}
-		fs.unlinkSync(dotFile);
-	},
-	
-	getDotFileForAlias: function(alias) {
+	deleteDotFile: function(url, userName) {
 		var dotDirName = this.getDotDirectory(true);
 		if ( ! dotDirName) {
 			return null;
 		}
 		var allFiles = fs.readdirSync(dotDirName);
+		_.each(allFiles, function(f) {
+			if (f === 'currentServer.txt') {
+				return;
+			}
+			var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
+			if (fileContent.url === url && fileContent.userName === userName) {
+				console.log('Deleting login file: ' + f);
+				fs.unlinkSync(dotDirName + "/" + f);
+			}
+		});
+	},
+	
+	// Delete the dot file for the given alias.
+	// Return true if successful, false otherwise
+	deleteDotFileForAlias: function(alias) {
+		var dotFile = this.getDotFileForAlias(alias);
+		if ( ! dotFile) {
+			return false;
+		}
+		fs.unlinkSync(dotFile);
+		return true;
+	},
+	
+	getDotFileForAlias: function(alias) {
+		var dotDirName = this.getDotDirectory(false);
+		if ( ! dotDirName) {
+			return null;
+		}
+		var allFiles = fs.readdirSync(dotDirName);
 		var dotFile = _.find(allFiles, function(f) {
-			//console.log('File: ' + f);
 			if (f === 'currentServer.txt') {
 				return false;
 			}
@@ -70,11 +77,27 @@ module.exports = {
 		return dotDirName + "/" + dotFile;
 	},
 	
+	getLoginForAlias: function(alias) {
+		var dotFileName = this.getDotFileForAlias(alias);
+		if ( ! fs.existsSync(dotFileName)) {
+			return null;
+		}
+		var keyObject = JSON.parse(fs.readFileSync(dotFileName));
+		var expiration = Date.parse(keyObject.loginInfo.expiration);
+		if (expiration > new Date()) {
+			return keyObject;
+		}
+		console.log('The API key for this server has expired - you need to log in again'.yellow);
+		this.deleteDotFileForAlias(alias);
+		return null;
+	},
+	
 	// Get the API key for the given URL, if available and current
-	getApiKey: function(url) {
+	getApiKey: function(url, userName) {
+		//console.log('Getting API key for user: ' + userName);
 		var dotDirName = this.getDotDirectory();
-		var dotFileName = dotDirName + "/" + querystring.escape(url);
-		if ( ! fs.existsSync(dotDirName)) {
+		var dotFileName = dotDirName + "/" + querystring.escape(url) + "--" + userName;
+		if ( ! fs.existsSync(dotFileName)) {
 			return null;
 		}
 		var keyObject = JSON.parse(fs.readFileSync(dotFileName));
@@ -83,16 +106,20 @@ module.exports = {
 			return keyObject.loginInfo.apikey;
 		}
 		console.log('The API key for this server has expired - you need to log in again'.yellow);
-		this.deleteDotFile(url);
+		this.deleteDotFile(url, userName);
 		return null;
 	},
 	
 	// Write the given URL to ~/.espresso/currentServer.txt
-	setCurrentServer: function(url) {
+	setCurrentServer: function(url, login) {
 		var dotDirName = this.getDotDirectory();
 		var dotFileName = dotDirName + "/currentServer.txt";
 		var dotFile = fs.openSync(dotFileName, 'w', 0600);
-		fs.writeSync(dotFile, url);
+		var record = {
+			url: url,
+			userName: login.userName
+		};
+		fs.writeSync(dotFile, JSON.stringify(record));
 	},
 	
 	// If there is a ~/.espresso/currentServer.txt, return its content, otherwise null
@@ -102,7 +129,8 @@ module.exports = {
 		if ( ! fs.existsSync(dotDirName)) {
 			return null;
 		}
-		return fs.readFileSync(dotFileName);
+		var objStr = fs.readFileSync(dotFileName);
+		return JSON.parse(objStr);
 	},
 	
 	unsetCurrentServer: function() {

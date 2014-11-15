@@ -5,7 +5,7 @@ A command-line tool to access Espresso Logic services
 
 
 ## Installation
-npm install espressocli
+npm install espresso-cli
 
 
 ## Features

@@ -1,18 +1,30 @@
 
 var Client = require('node-rest-client').Client;
 var colors = require('colors');
+var fs = require('fs');
+var _ = require('underscore');
+var Table = require('cli-table');
 
 var dotfile = require('../util/dotfile.js');
 
 module.exports = {
-	commandLogin: function (cmd) {
+	commandLogin: function (url, cmd) {
 		console.log('Logging in...');
 		var client = new Client();
 		
-		client.get(cmd.url + "/@license", function(data) {
+		if ( ! url) {
+			console.log('You must specify the URL to the Espresso Logic server'.red);
+			return;
+		}
+		
+		client.get(url + "/@license", function(data) {
+			if (data.errorMessage) {
+				console.log(data.errorMessage + data.company.red);
+				return;
+			}
 			console.log("This server licensed to: " + data.company.red);
 
-			client.post(cmd.url + "/@authentication",
+			client.post(url + "/@authentication",
 				{
 					data: {
 						username: cmd.username,
@@ -21,19 +33,18 @@ module.exports = {
 					headers: {"Content-Type": "application/json"}
 				},
 				function(data, response) {
-					//console.log(data);
 					if (data.errorMessage) {
 						console.log(("Login failed: " + data.errorMessage).red);
 						return;
 					}
 					var fullData = {
-						url: cmd.url,
+						url: url,
 						userName: cmd.username,
-						alias: cmd.alias,
+						alias: cmd.serverAlias,
 						loginInfo: data
 					};
-					dotfile.writeToDotFile(cmd.url, fullData);
-					dotfile.setCurrentServer(cmd.url);
+					dotfile.writeToDotFile(url, fullData);
+					dotfile.setCurrentServer(url, fullData);
 					console.log(('Login successful, API key will expire on: ' + data.expiration).green);
 				}).on('error', function(err) {
 					console.log(('ERROR: ' + err).red);
@@ -44,18 +55,81 @@ module.exports = {
 		
 	},
 	
-	commandLogout: function(cmd) {
-		console.log("Logging out...");
-		if (cmd.url) {
-			dotfile.deleteDotFile(cmd.url);
+	commandLogout: function(url, cmd) {
+		if (url) {
+			dotfile.deleteDotFile(url);
 		}
-		else if (cmd.alias) {
-			dotfile.deleteDotFileForAlias(cmd.alias);
-			console.log(('Logout successful for alias ' + cmd.alias).green);
+		else if (cmd.serverAlias) {
+			if (dotfile.deleteDotFileForAlias(cmd.serverAlias)) {
+				console.log(('Logout successful for alias ' + cmd.serverAlias).green);
+			}
+			else {
+				console.log(('Unknown alias: ' + cmd.serverAlias).red);
+			}
 		}
 		else {
 			dotfile.unsetCurrentServer();
 			console.log('Logout successful'.green);
+		}
+	},
+	
+	commandUseAlias: function(serverAlias, cmd) {
+		if ( ! serverAlias) {
+			console.log('You must specify a server alias'.red);
+			return;
+		}
+		var login = dotfile.getLoginForAlias(serverAlias);
+		if ( ! login) {
+			console.log(('No such alias: ' + serverAlias).red);
+			return;
+		}
+		dotfile.setCurrentServer(login.url, login);
+		console.log(('You are now using server ' + login.url + " as user " + login.userName).green);
+	},
+	
+	commandStatus: function() {
+		
+		// Show the current server, if any
+		var login = dotfile.getCurrentServer();
+		if (login && dotfile.getApiKey(login.url, login.userName)) {
+			console.log('You are currently logged in to server: ' + login.url.yellow + 
+					' as user ' + login.userName.yellow);
+		}
+		else {
+			console.log('You are not currently logged in to any server'.yellow);
+		}
+		
+		var numAliases = 0;
+		var tbl = new Table({
+			head: ['Alias', 'Server', 'User']
+		});
+		var dotDirName = dotfile.getDotDirectory(false);
+		if (dotDirName) {
+			var allFiles = fs.readdirSync(dotDirName);
+			_.each(allFiles, function(f) {
+				if (f === 'currentServer.txt') {
+					return;
+				}
+				var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
+				var expiration = Date.parse(fileContent.loginInfo.expiration);
+				if (expiration > new Date()) {
+					if (fileContent.alias) {
+						tbl.push([fileContent.alias, fileContent.url, fileContent.userName]);
+						numAliases++;
+					}
+				}
+				else {
+					dotfile.deleteDotFile(fileContent.url, fileContent.userName);
+				}
+			});
+		}
+		
+		if (numAliases === 0) {
+			console.log('No aliases currently defined'.yellow);
+		}
+		else {
+			console.log("Defined aliases:");
+			console.log(tbl.toString());
 		}
 	}
 };

@@ -5,13 +5,17 @@ var querystring = require("querystring");
 
 var dotfile = require('../util/dotfile.js');
 var printObject = require('../util/printObject.js');
+var login = require('../util/login.js');
 
 module.exports = {
-	commandGet: function (cmd) {
+	commandGet: function (resName, cmd) {
 		var client = new Client();
-		var url = dotfile.getCurrentServer();
-		var apiKey = dotfile.getApiKey(url);
-		if ( ! cmd.resource) {
+		
+		var loginInfo = login.login(cmd);
+		var url = loginInfo.url;
+		var apiKey = loginInfo.apiKey;
+
+		if ( ! resName) {
 			console.log('Error: a resource or table name must be specified'.red);
 			return;
 		}
@@ -40,7 +44,7 @@ module.exports = {
 			}
 		}
 		
-		var objUrl = cmd.resource;
+		var objUrl = resName;
 		if (cmd.pk) {
 			objUrl += "/" + cmd.pk;
 		}
@@ -62,7 +66,7 @@ module.exports = {
 				termWidth = process.stdout.getWindowSize()[0];
 
 			if (!cmd.format || cmd.format === "text") {
-				var header = "GET for " + cmd.resource + ": ";
+				var header = "GET for " + resName + ": ";
 				while (header.length < termWidth )
 					header += " ";
 				console.log(header.bgWhite.blue);
@@ -77,11 +81,11 @@ module.exports = {
 			else {
 				if (Array.isArray(data)) {
 					_.each(data, function(obj) {
-						printObject.printObject(obj, null, 0);
+						printObject.printObject(obj, null, 0, null, cmd.truncate);
 					});
 				}
 				else {
-					printObject.printObject(data, cmd.resource, 0);
+					printObject.printObject(data, cmd.resource, 0, null, cmd.truncate);
 				}
 			}
 			
@@ -90,7 +94,7 @@ module.exports = {
 				trailer += " - # top-level objects: ";
 				if (Array.isArray(data)) {
 					if (data.length == 0) {
-						console.log('No data returned'.yellow);
+						console.log('No rows returned'.yellow);
 					}
 					var nextBatchPresent = false;
 					if (data.length > 0) {
