@@ -1,7 +1,7 @@
 
 
 # EspressoCLI
-A command-line tool to access Espresso Logic services. 
+A Node.js command-line tool to access Espresso Logic REST API and Logic services. 
 Refer to online documentation of creating and using Espresso Logic [REST API](http://docs.espressologic.com/docs/live-api) 
 
 
