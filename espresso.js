@@ -7,7 +7,6 @@
 var program = require('commander');
 var path = require('path');
 var pkg = require( path.join(__dirname, 'package.json') );
-var Client = require('node-rest-client').Client;
 
 var login = require('./commands/login.js');
 var get = require('./commands/get.js');
@@ -97,6 +96,3 @@ if (process.argv.length < 2) {
 }
 
 exports.program = program;
-
-//console.log("URL: " + program.url);
-
