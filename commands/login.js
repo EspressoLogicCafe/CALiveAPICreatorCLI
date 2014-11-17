@@ -45,7 +45,11 @@ module.exports = {
 					};
 					dotfile.writeToDotFile(url, fullData);
 					dotfile.setCurrentServer(url, fullData);
-					console.log(('Login successful, API key will expire on: ' + data.expiration).green);
+					var aliasMsg = "";
+					if (cmd.serverAlias) {
+						aliasMsg = " - alias for this connection is: " + cmd.serverAlias.green;
+					}
+					console.log(('Login successful, API key will expire on: ' + data.expiration).green + aliasMsg);
 				}).on('error', function(err) {
 					console.log(('ERROR: ' + err).red);
 					throw "Error logging in: " + err;
@@ -107,7 +111,7 @@ module.exports = {
 		if (dotDirName) {
 			var allFiles = fs.readdirSync(dotDirName);
 			_.each(allFiles, function(f) {
-				if (f === 'currentServer.txt') {
+				if (f === 'currentServer.txt' || f === 'admin') {
 					return;
 				}
 				var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));

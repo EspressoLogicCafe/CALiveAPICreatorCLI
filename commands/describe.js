@@ -15,6 +15,9 @@ module.exports = {
 		var client = new Client();
 
 		var loginInfo = login.login(cmd);
+		if ( ! loginInfo) {
+			return;
+		}
 		var url = loginInfo.url;
 		var apiKey = loginInfo.apiKey;
 

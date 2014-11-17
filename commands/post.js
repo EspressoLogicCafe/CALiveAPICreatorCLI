@@ -55,6 +55,10 @@ module.exports = {
 		}
 
 		var startTime = new Date();
+		var fullResource = resource;
+		if (cmd.pk) {
+			fullResource += "/" + cmd.pk;
+		}
 		client[verb](url + "/" + resource, {
 			data: cmd.json,
 			headers: {

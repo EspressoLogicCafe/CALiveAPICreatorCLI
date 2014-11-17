@@ -23,18 +23,19 @@ $ npm install espresso-cli
 ```sh
 $ espresso --help
 
-  Usage: espresso [options] [command]
+  Usage: espresso [options] [command] 
 
   Commands:
 
-    login [options]              Login to an Espresso Logic server
-    logout [options]             Logout from the current server, or a specific server
-    use <alias>                  Use the specified server by default
-    status                       Show the current server, and any defined server aliases
-    get [options] <resource>     Retrieve some data for the given resource/table/view
-    post [options] <resource>    Insert some data
-    put [options] <resource>     Update some data
-    delete [options] <resource>  Delete some data
+    login [options]               Login to an Espresso Logic server
+    logout [options]              Logout from the current server, or a specific server
+    use <alias>                   Use the specified server by default
+    status                        Show the current server, and any defined server aliases
+    get <resource> [options]      Retrieve some data for the given resource/table/view
+    post <resource> [options]     Insert some data
+    put <resource> [options]      Update some data
+    delete <resource> [options]   Delete some data
+    describe <resource> [options] Describe the specified resource, can be: tables[/tablename], views[/viewname], license, serverinfo
 
   Options:
 
@@ -43,23 +44,71 @@ $ espresso --help
 
 ```
 
-## Logon once to an Espresso Logic Server
+## Logon to an Espresso Logic Server
 ```sh
-$ espresso login -U username -p mypassword -u http://my.espressologic.com/rest/el-dev/demo/v1
+$ espresso login http://my.espressologic.com/rest/el-dev/demo/v1 -U username -p mypassword
 Logging in...
 This server licensed to: Espresso Logic
 Login successful, API key will expire on: 2014-11-18T15:03:37.342Z
-
 ```
+
+
+## See which Espresso server (if any) you are logged into
+```sh
+$ espresso status
+
+You are currently logged in to server: https://eval.espressologic.com/rest/acme/demo/v1 as user demo
+Defined aliases:
+┌───────┬───────────────────────────────────────────────────────────┬───────┐
+│ Alias │ Server                                                    │ User  │
+├───────┼───────────────────────────────────────────────────────────┼───────┤
+│ hr    │ https://acme.my.espressologic.com/rest/acme/hr/v2         │ hradm │
+├───────┼───────────────────────────────────────────────────────────┼───────┤
+│ demo  │ https://eval.espressologic.com/rest/acme/demo/v1          │ demo  │
+└───────┴───────────────────────────────────────────────────────────┴───────┘
+```
+
+
+## DESCRIBE a list of system resources
+This can return information about all tables, or one specific table,
+or all all views/one specific view, or get information about the server
+or the server's license.
+
+```sh
+$ espresso describe tables [options]
+
+DB    Table
+----  -------------------
+demo  customer
+demo  employee
+demo  employee_picture
+demo  LineItem
+demo  product
+demo  PurchaseOrder
+demo  purchaseorder_audit
+```
+
+```sh
+$ espresso describe tables/product
+
+Name            Type     Size      PK
+--------------  -------  --------  --
+product_number  BIGINT         19  *
+name            VARCHAR        50
+price           DECIMAL        19
+icon            BLOB        65535
+full_image      BLOB     16777215
+```
+
 
 ## GET 
 ```sh
-  Usage: get [options] <resource>
+  Usage: get <resource> [options] 
 
   Options:
 
     -h, --help                       output usage information
-    -k, --pk <pk>                    Name of the table or resource
+    -k, --pk <pk>                    Optional: primary key of the object to retrieve
     -f, --filter <filter>            Optional: filter, e.g. "balance<1000"
     -s, --sort <sort>                Optional: sorting order, e.g. "balance,name desc"
     -z, --pagesize <pagesize>        Optional: up to how many rows to return per level
@@ -67,74 +116,45 @@ Login successful, API key will expire on: 2014-11-18T15:03:37.342Z
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 ```
 
-## GET a list of Tables/Views/Procedures/Resources
-1. list of all tables @tables
-2. list of all veiws @views
-3. list of all stored procedures @procedures
-4. list of all custom resources @resources
-
-```sh
-$ espresso get @tables
-
-@tables/demo:customer prefix:demo entity:customer name:demo:customer
-@tables/demo:employee prefix:demo entity:employee name:demo:employee
-@tables/demo:employee_picture prefix:demo entity:employee_picture
-@tables/demo:LineItem prefix:demo entity:LineItem name:demo:LineItem
-@tables/demo:product prefix:demo entity:product name:demo:product
-@tables/demo:PurchaseOrder prefix:demo entity:PurchaseOrder
-@tables/demo:purchaseorder_audit prefix:demo entity:purchaseorder_audit
-
-```
 
 ## Get a single REST endpoint (compressed format)
 ```sh
-$ espresso get customer
+$ espresso get employee
 
-demo:customer/Alpha%20and%20Sons name:Alpha and Sons balance:4484
-demo:customer/Argonauts name:Argonauts balance:1858 credit_limit:2000
-demo:customer/Baja%20Software%20Ltd name:Baja Software Ltd balance:635
-demo:customer/Black%20Sheep%20Industries name:Black Sheep Indus... balance:76
-demo:customer/Bravo%20Hardware name:Bravo Hardware balance:2996
-demo:customer/Charlie's%20Construction name:Charlie's Constru... balance:1351
-demo:customer/Delta%20Engineering name:Delta Engineering balance:2745
-demo:customer/Echo%20Environmental%20Services name:Echo Environmenta...
-demo:customer/Foxtrot%20Farm%20Supply name:Foxtrot Farm Supply balance:2957
-demo:customer/Golf%20Industries name:Golf Industries balance:3359
-demo:customer/Hotel%20Services name:Hotel Services balance:4481
-demo:customer/India%20Investigators name:India Investigators balance:5696
-demo:customer/Jack%20Trading%20Co. name:Jack Trading Co. balance:46
-demo:customer/Jill%20Exports%20Ltd. name:Jill Exports Ltd. balance:43
-demo:customer/Juliet%20Dating%20Inc. name:Juliet Dating Inc. balance:1297
-demo:customer/Kilo%20Combustibles name:Kilo Combustibles balance:6476
-demo:customer/La%20Jolla%20Ice%20Cream name:La Jolla Ice Cream balance:59
-demo:customer/Lima%20Citrus%20Supply name:Lima Citrus Supply balance:65
-demo:customer/Mike%20and%20Bob's%20Construction name:Mike and Bob's Co...
-demo:customer/November%20Nuptials%20Wedding%20Co name:November Nuptials...
+demo:employee/1 employee_id:1 login:sam name:Sam Yosemite
+demo:employee/2 employee_id:2 login:mlittlelamb name:Mary Little-Lamb
+demo:employee/3 employee_id:3 login:sconnor name:Sarah Connor
+demo:employee/4 employee_id:4 login:jkim name:John Kim
+demo:employee/5 employee_id:5 login:bmcmanus name:Becky McManus
+etc...
 ```
 
 ## GET a single REST endpoint (JSON format)
 ```sh
-$ espresso get -k "Alpha and Sons" -m json customer
+$ espresso get employee/4 -m json 
 [
   {
     "@metadata": {
-      "href": "http://demodev.espressologic.com/rest/el-dev/demo/v1/demo:custome
-r/Alpha%20and%20Sons",
-      "checksum": "A:e86aea2e0a4e74bf",
+      "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:employee/4",
+      "checksum": "A:3ed29188014675ec",
       "links": [
         {
-          "href": "http://demodev.espressologic.com/rest/el-dev/demo/v1/demo:Pur
-chaseOrder?filter=customer_name%20%3D%20'Alpha%20and%20Sons'",
+          "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:employee_picture?filter=employee_id%20%3D%204",
+          "rel": "children",
+          "role": "employee_pictureList",
+          "type": "http://localhost:8080/KahunaService/rest/el-local/demo/demo:employee_picture"
+        },
+        {
+          "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:PurchaseOrder?filter=salesrep_id%20%3D%204",
           "rel": "children",
           "role": "PurchaseOrderList",
-          "type": "http://demodev.espressologic.com/rest/el-dev/demo/demo:Purcha
-seOrder"
+          "type": "http://localhost:8080/KahunaService/rest/el-local/demo/demo:PurchaseOrder"
         }
       ]
     },
-    "name": "Alpha and Sons",
-    "balance": 4484,
-    "credit_limit": 9000
+    "employee_id": 4,
+    "login": "jkim",
+    "name": "John Kim"
   }
 ]
 ```
@@ -144,7 +164,7 @@ seOrder"
 ```sh
 $ espresso post --help
 
-  Usage: post [options] <resource>
+  Usage: post <resource> [options]
 
   Options:
 
@@ -154,7 +174,7 @@ $ espresso post --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-$ espresso post -j { "name": "new posted record","balance": 0,"credit_limit": 9000 } customer
+$ espresso post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
 ```
 
 ## PUT (update) a JSON Payload
@@ -162,7 +182,7 @@ $ espresso post -j { "name": "new posted record","balance": 0,"credit_limit": 90
 ```sh
 $ espresso put --help
 
-  Usage: put [options] <resource>
+  Usage: put <resource> [options]
 
   Options:
 
@@ -172,7 +192,7 @@ $ espresso put --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
     
-$ espresso put -j { "@metadata": {"checksum": "A:e86aea2e0a4e74bf"  }, "balance": 0  } customer
+$ espresso put employee/4 -j '{ "@metadata": {"checksum": "A:3ed29188014675ec"  }, "name": "John H. Kim"  }'
 ```
 
 ## DELETE a REST resource
@@ -180,7 +200,7 @@ $ espresso put -j { "@metadata": {"checksum": "A:e86aea2e0a4e74bf"  }, "balance"
 ```sh
 $ espresso delete --help
 
-  Usage: delete [options] <resource>
+  Usage: delete <resource> [options]
 
   Options:
 
@@ -191,7 +211,7 @@ $ espresso delete --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-espresso delete  -k "new posted record" --checksum "A:e86aea2e0a4e74bf"  customer
+espresso delete customer -k "new posted record" --checksum "A:e86aea2e0a4e74bf" 
 ```
 ## Logout
 

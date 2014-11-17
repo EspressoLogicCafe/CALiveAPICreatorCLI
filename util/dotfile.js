@@ -36,7 +36,7 @@ module.exports = {
 		}
 		var allFiles = fs.readdirSync(dotDirName);
 		_.each(allFiles, function(f) {
-			if (f === 'currentServer.txt') {
+			if (f === 'currentServer.txt' || f === 'admin') {
 				return;
 			}
 			var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
@@ -65,7 +65,7 @@ module.exports = {
 		}
 		var allFiles = fs.readdirSync(dotDirName);
 		var dotFile = _.find(allFiles, function(f) {
-			if (f === 'currentServer.txt') {
+			if (f === 'currentServer.txt' || f === 'admin') {
 				return false;
 			}
 			var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));

@@ -46,7 +46,7 @@ program
 program
 	.command('get <resource>')
 	.description('Retrieve some data for the given resource/table/view')
-	.option('-k, --pk <pk>', 'Name of the table or resource')
+	.option('-k, --pk <pk>', 'Primary key of the table or resource')
 	.option('-f, --filter <filter>', 'Optional: filter, e.g. "balance<1000"')
 	.option('-s, --sort <sort>', 'Optional: sorting order, e.g. "balance,name desc"')
 	.option('-z, --pagesize <pagesize>', 'Optional: up to how many rows to return per level')
@@ -67,6 +67,7 @@ program
 program
 	.command('put <resource>')
 	.description('Update some data')
+	.option('-k, --pk <pk>', 'Primary key of the table or resource')
 	.option('-j, --json <json>', 'JSON string for the data being updated')
 	.option('-f, --jsonfile <jsonfile>', 'Name of a file containing JSON to be updated, or stdin to read from stdin')
 	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
@@ -86,6 +87,7 @@ program
 program
 	.command('describe <resource>')
 	.description('Describe the specified resource, can be: tables[/tablename], views[/viewname], license, serverinfo')
+	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(describe.commandDescribe);
 
 program.parse(process.argv);
