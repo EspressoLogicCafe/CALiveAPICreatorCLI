@@ -59,7 +59,7 @@ module.exports = {
 		if (cmd.pk) {
 			fullResource += "/" + cmd.pk;
 		}
-		client[verb](url + "/" + resource, {
+		client[verb](url + "/" + fullResource, {
 			data: cmd.json,
 			headers: {
 				Authorization: "Espresso " + apiKey + ":1"

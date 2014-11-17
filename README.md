@@ -72,7 +72,13 @@ Defined aliases:
 ## DESCRIBE a list of system resources
 This can return information about all tables, or one specific table,
 or all all views/one specific view, or get information about the server
-or the server's license.
+or the server's license. The possible values for the resource are:
+* tables
+* tables/<table-name>
+* views
+* views/<view-name>
+* license
+* serverinfo
 
 ```sh
 $ espresso describe tables [options]
@@ -175,6 +181,10 @@ $ espresso post --help
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
 $ espresso post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
+
+POST for customer:
+I demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:9000
+Request took: 61ms - # objects touched: 1
 ```
 
 ## PUT (update) a JSON Payload
@@ -192,7 +202,11 @@ $ espresso put --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
     
-$ espresso put employee/4 -j '{ "@metadata": {"checksum": "A:3ed29188014675ec"  }, "name": "John H. Kim"  }'
+$ espresso put customer -j '{ "@metadata": {"checksum": "A:693190f461f5402e"  }, "name": "new posted record", "credit_limit": 8000  }'
+
+PUT for customer:
+U demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:8000
+Request took: 42ms - # objects touched: 1
 ```
 
 ## DELETE a REST resource
