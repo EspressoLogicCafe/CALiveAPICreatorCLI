@@ -46,6 +46,10 @@ $ >espresso --help
 ## Logon once to an Espresso Logic Server
 ```sh
 $ espresso login -U username -p mypassword -u http://my.espressologic.com/rest/el-dev/demo/v1
+Logging in...
+This server licensed to: Espresso Logic
+Login successful, API key will expire on: 2014-11-18T15:03:37.342Z
+
 ```
 
 ## GET 
