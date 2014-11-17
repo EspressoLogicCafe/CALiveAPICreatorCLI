@@ -21,7 +21,7 @@ $ npm install espresso-cli
 
 ## Command Line Service
 ```sh
-$ >espresso --help
+$ espresso --help
 
   Usage: espresso [options] [command]
 
