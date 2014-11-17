@@ -63,7 +63,11 @@ $ espresso login -U username -p mypassword -u http://my.espressologic.com/rest/e
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 ```
 
-## GET a list of Tables
+## GET a list of Tables/Views/Procedures/Resources
+1. list of all tables @tables
+2. list of all veiws @views
+3. list of all stored procedures @procedures
+4. list of all custom resources @resources
 
 ```sh
 $ espresso get @tables
@@ -78,7 +82,7 @@ $ espresso get @tables
 
 ```
 
-## Get a single Table (compressed format)
+## Get a single REST endpoint (compressed format)
 ```sh
 $ espresso get customer
 
@@ -104,7 +108,7 @@ demo:customer/Mike%20and%20Bob's%20Construction name:Mike and Bob's Co...
 demo:customer/November%20Nuptials%20Wedding%20Co name:November Nuptials...
 ```
 
-## GET a single table (JSON format)
+## GET a single REST endpoint (JSON format)
 ```sh
 $ espresso get -k "Alpha and Sons" -m json customer
 [
@@ -131,7 +135,7 @@ seOrder"
 ]
 ```
 
-## POST
+## POST (insert) a JSON payload 
 
 ```sh
 $ espresso post --help
@@ -149,7 +153,7 @@ $ espresso post --help
 $ espresso post -j { "name": "new posted record","balance": 0,"credit_limit": 9000 } customer
 ```
 
-## PUT
+## PUT (update) a JSON Payload
 
 ```sh
 $ espresso put --help
@@ -167,7 +171,7 @@ $ espresso put --help
 $ espresso put -j { "@metadata": {"checksum": "A:e86aea2e0a4e74bf"  }, "balance": 0  } customer
 ```
 
-## DELETE
+## DELETE a REST resource
 
 ```sh
 $ espresso delete --help
