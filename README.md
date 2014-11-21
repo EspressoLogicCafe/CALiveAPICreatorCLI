@@ -74,9 +74,9 @@ This can return information about all tables, or one specific table,
 or all views/one specific view, or get information about the server
 or the server's license. The possible values for the resource are:
 * tables
-* tables/<table-name>
+* tables/&lt;table-name>
 * views
-* views/<view-name>
+* views/&lt;view-name>
 * license
 * serverinfo
 
