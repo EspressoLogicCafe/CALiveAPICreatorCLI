@@ -17,9 +17,24 @@ module.exports = {
 			return;
 		}
 		
+		// Check that the URL looks well-formed
+		if ( ! url.match(/^https?:\/\/[\w-\.]+\/rest\/[\w-]+\/[\w-]+\/[\w-]+\/?$/)) {
+			console.log('The URL you specified seems incomplete. It should be in the form:'.red);
+			console.log('   http[s]://<server>/rest/<account>/<project>/<api-version>'.yellow);
+			return;
+		}
+		
+		// Remove trailing slash if present
+		if (url.match(/.*\/$/)) {
+			url = url.substring(0, url.length - 1);
+		}
+		
 		client.get(url + "/@license", function(data) {
+			if (typeof data === "string") {
+				data = JSON.parse(data);
+			}
 			if (data.errorMessage) {
-				console.log(data.errorMessage + data.company.red);
+				console.log(data.errorMessage.red);
 				return;
 			}
 			console.log("This server licensed to: " + data.company.red);

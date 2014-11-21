@@ -46,7 +46,7 @@ $ espresso --help
 
 ## Logon to an Espresso Logic Server
 ```sh
-$ espresso login http://my.espressologic.com/rest/el-dev/demo/v1 -U username -p mypassword
+$ espresso login http://my.espressologic.com/rest/el-dev/demo/v1 -u username -p mypassword
 Logging in...
 This server licensed to: Espresso Logic
 Login successful, API key will expire on: 2014-11-18T15:03:37.342Z
@@ -69,9 +69,9 @@ Defined aliases:
 ```
 
 
-## DESCRIBE a list of system resources
+## DESCRIBE a system resource
 This can return information about all tables, or one specific table,
-or all all views/one specific view, or get information about the server
+or all views/one specific view, or get information about the server
 or the server's license. The possible values for the resource are:
 * tables
 * tables/<table-name>
@@ -81,7 +81,7 @@ or the server's license. The possible values for the resource are:
 * serverinfo
 
 ```sh
-$ espresso describe tables [options]
+$ espresso describe tables
 
 DB    Table
 ----  -------------------
