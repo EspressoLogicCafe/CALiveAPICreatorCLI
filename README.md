@@ -10,14 +10,26 @@ Refer to online documentation of creating and using Espresso Logic [REST API](ht
 1. Download [node.js](http://nodejs.org)
 2. Install using `npm` by running the following:
 ```sh
-$ npm install espresso-cli
+$ npm install -g espresso-cli
 ```
+
+Note: on Unix and Mac, you will probably need to run this with sudo because of file permissions:
+
+```sh
+$ sudo npm install -g espresso-cli
+```
+
+*Windows*: Please note that, on Windows, `npm install` will create an executable 
+called `espresso` in your
+`<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
+want to fix that, otherwise you'll have to specify the full path to the executable.
 
 
 ## Features
-	* Log in once per server, stay "logged in" for the lifetime of the API key
-	* Can call GET, POST, PUT and DELETE
-	* Can read objects from file or from stdin (suitable for pipework!)
+
+* Log in once per server, stay "logged in" for the lifetime of the API key
+* Can call GET, POST, PUT and DELETE
+* Can read/write objects from/to file or stdin (suitable for pipe work!)
 
 ## Command Line Service
 ```sh
@@ -73,6 +85,7 @@ Defined aliases:
 This can return information about all tables, or one specific table,
 or all views/one specific view, or get information about the server
 or the server's license. The possible values for the resource are:
+
 * tables
 * tables/&lt;table-name>
 * views
