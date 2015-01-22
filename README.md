@@ -7,7 +7,7 @@ Refer to online documentation of creating and using Espresso Logic [REST API](ht
 
 ## Installation
 
-1. Download [node.js](http://nodejs.org)
+1. Make sure [node.js](http://nodejs.org) is installed
 2. Install using `npm` by running the following:
 ```sh
 $ npm install -g espresso-cli
@@ -35,7 +35,7 @@ want to fix that, otherwise you'll have to specify the full path to the executab
 ```sh
 $ espresso --help
 
-  Usage: espresso [options] [command] 
+  Usage: espresso \[options] [command] 
 
   Commands:
 

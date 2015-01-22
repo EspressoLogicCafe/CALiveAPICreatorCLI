@@ -87,10 +87,12 @@ module.exports = {
 
 		module.exports.printHeader("Description of " + type + " " + data.name.magenta);
 		
+		var allCols = _.indexBy(data.columns, "name");
+		
 		var pkCols = {};
-		if (data.primaryKey) {
-			_.each(data.primaryKey.columns, function(c) {
-				pkCols[c.name] = c;
+		if (data.primaryKeyColumns) {
+			_.each(data.primaryKeyColumns, function(pkColName) {
+				pkCols[pkColName] = allCols[pkColName];
 			});
 		}
 
