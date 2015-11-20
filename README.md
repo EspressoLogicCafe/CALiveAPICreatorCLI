@@ -154,20 +154,20 @@ $ liveapicreator get employee/4 -m json
 [
   {
     "@metadata": {
-      "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:employee/4",
+      "href": "http://localhost:8080/rest/default/demo/v1/demo:employee/4",
       "checksum": "A:3ed29188014675ec",
       "links": [
         {
-          "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:employee_picture?filter=employee_id%20%3D%204",
+          "href": "http://llocalhost:8080/rest/default/demo/v1/demo:employee_picture?filter=employee_id%20%3D%204",
           "rel": "children",
           "role": "employee_pictureList",
-          "type": "http://localhost:8080/KahunaService/rest/el-local/demo/demo:employee_picture"
+          "type": "http://localhost:8080/rest/default/demo/demo:employee_picture"
         },
         {
-          "href": "http://localhost:8080/KahunaService/rest/el-local/demo/v1/demo:PurchaseOrder?filter=salesrep_id%20%3D%204",
+          "href": "http://localhost:8080/rest/default/demo/v1/demo:PurchaseOrder?filter=salesrep_id%20%3D%204",
           "rel": "children",
           "role": "PurchaseOrderList",
-          "type": "http://localhost:8080/KahunaService/rest/el-local/demo/demo:PurchaseOrder"
+          "type": "http://llocalhost:8080/rest/default/demo/demo:PurchaseOrder"
         }
       ]
     },
