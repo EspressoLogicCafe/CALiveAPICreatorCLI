@@ -35,7 +35,7 @@ module.exports = {
 		function delObject(url, checksum) {
 			client['delete'](url + "?checksum=" + checksum, {
 				headers: {
-					Authorization: "Espresso " + apiKey + ":1"
+					Authorization: "CALiveAPICreator " + apiKey + ":1"
 				}
 			}, function(data) {
 				//console.log(data);

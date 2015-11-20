@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * A command-line interface for Espresso Logic
+ * A command-line interface for CA Live API Creator from CA Technologies
  */
 
 var program = require('commander');
@@ -21,9 +21,9 @@ program
 
 program
 	.command('login <url>')
-	.description('Login to an Espresso Logic server')
-	.option('-u, --username <username>', 'Espresso user name under which to log in')
-	.option('-p, --password <password>', 'Espresso password')
+	.description('Login to an API Server')
+	.option('-u, --username <username>', 'User name (admin account)')
+	.option('-p, --password <password>', 'Password')
 	.option('-a, --serverAlias <serverAlias>', 'Alias for this connection')
 	.action(login.commandLogin);
 

@@ -1,13 +1,15 @@
 {
-  "name": "espresso-cli",
+  "name": "liveapicreator-cli",
   "version": "1.3.3",
-  "description": "The command line utility for Espresso Logic",
+  "description": "The command line utility for CA Live API Creator from CA Technologies",
   "main": "espresso.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "espresso",
+    "liveapicreator",
+    "API Server",
+    "Data Explorer",
     "logic",
     "command",
     "line",
@@ -25,9 +27,9 @@
   ],
   "preferGlobal": "true",
   "bin": {
-    "espresso" : "espresso.js"
+    "espresso" : "liveapicreator.js"
   },
-  "author": "Espresso Logic",
+  "author": "CA Technologies APIM",
   "license": "Apache",
   "dependencies": {
     "colors": "^1.0.3",
@@ -41,10 +43,10 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "https://github.com/EspressoLogicCafe/EspressoLogicCLI.git"
+    "url": "https://github.com/EspressoLogicCafe/CALiveAPICreatorCLI.git"
   },
   "bugs": {
-    "url": "https://espressologic.zendesk.com"
+    "url": "https://github.com/EspressoLogicCafe/CALiveAPICreatorCLI.git/issues"
   },
-  "homepage": "https://github.com/EspressoLogicCafe/EspressoLogicCLI"
+  "homepage": "https://github.com/EspressoLogicCafe/CALiveAPICreatorCLI.git"
 }

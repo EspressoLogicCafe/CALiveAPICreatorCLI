@@ -1,8 +1,8 @@
 
 
-# EspressoCLI
-A Node.js command-line tool to access Espresso Logic REST API and Logic services. 
-Refer to online documentation of creating and using Espresso Logic [REST API](http://docs.espressologic.com/docs/live-api) 
+# LiveAPICreatorCLI
+A Node.js command-line tool to access CA Live API Creator REST API and Logic services. 
+Refer to online documentation of creating and using Live API Creator [REST API](http://ca-doc.espressologic.com/docs/live-api) 
 
 
 ## Installation
@@ -10,17 +10,17 @@ Refer to online documentation of creating and using Espresso Logic [REST API](ht
 1. Make sure [node.js](http://nodejs.org) is installed
 2. Install using `npm` by running the following:
 ```sh
-$ npm install -g espresso-cli
+$ npm install -g liveapicreator-cli
 ```
 
 Note: on Unix and Mac, you will probably need to run this with sudo because of file permissions:
 
 ```sh
-$ sudo npm install -g espresso-cli
+$ sudo npm install -g liveapicreator-cli
 ```
 
 *Windows*: Please note that, on Windows, `npm install` will create an executable 
-called `espresso` in your
+called `liveapicreator` in your
 `<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
 want to fix that, otherwise you'll have to specify the full path to the executable.
 
@@ -33,13 +33,13 @@ want to fix that, otherwise you'll have to specify the full path to the executab
 
 ## Command Line Service
 ```sh
-$ espresso --help
+$ liveapicreator --help
 
-  Usage: espresso \[options] [command] 
+  Usage: liveapicreator \[options] [command] 
 
   Commands:
 
-    login [options]               Login to an Espresso Logic server
+    login [options]               Login to an API server
     logout [options]              Logout from the current server, or a specific server
     use <alias>                   Use the specified server by default
     status                        Show the current server, and any defined server aliases
@@ -56,27 +56,27 @@ $ espresso --help
 
 ```
 
-## Logon to an Espresso Logic Server
+## Logon to an API Server
 ```sh
-$ espresso login http://my.espressologic.com/rest/el-dev/demo/v1 -u username -p mypassword
+$ liveapicreator login http://localhost:8080/APIServer/rest/default/demo/v1 -u username -p mypassword
 Logging in...
-This server licensed to: Espresso Logic
-Login successful, API key will expire on: 2014-11-18T15:03:37.342Z
+This server licensed to: Live API Creator
+Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
 ```
 
 
-## See which Espresso server (if any) you are logged into
+## See which API server (if any) you are logged into
 ```sh
-$ espresso status
+$ liveapicreator status
 
-You are currently logged in to server: https://eval.espressologic.com/rest/acme/demo/v1 as user demo
+You are currently logged in to server: https://localhost:8080/APIServer/rest/default/demo/v1 as user: demo
 Defined aliases:
 ┌───────┬───────────────────────────────────────────────────────────┬───────┐
 │ Alias │ Server                                                    │ User  │
 ├───────┼───────────────────────────────────────────────────────────┼───────┤
 │ hr    │ https://acme.my.espressologic.com/rest/acme/hr/v2         │ hradm │
 ├───────┼───────────────────────────────────────────────────────────┼───────┤
-│ demo  │ https://eval.espressologic.com/rest/acme/demo/v1          │ demo  │
+│ demo  │ https://eval.acme.server.com/rest/acme/demo/v1            │ demo  │
 └───────┴───────────────────────────────────────────────────────────┴───────┘
 ```
 
@@ -94,7 +94,7 @@ or the server's license. The possible values for the resource are:
 * serverinfo
 
 ```sh
-$ espresso describe tables
+$ liveapicreator describe tables
 
 DB    Table
 ----  -------------------
@@ -108,7 +108,7 @@ demo  purchaseorder_audit
 ```
 
 ```sh
-$ espresso describe tables/product
+$ liveapicreator describe tables/product
 
 Name            Type     Size      PK
 --------------  -------  --------  --
@@ -138,7 +138,7 @@ full_image      BLOB     16777215
 
 ## Get a single REST endpoint (compressed format)
 ```sh
-$ espresso get employee
+$ liveapicreator get employee
 
 demo:employee/1 employee_id:1 login:sam name:Sam Yosemite
 demo:employee/2 employee_id:2 login:mlittlelamb name:Mary Little-Lamb
@@ -150,7 +150,7 @@ etc...
 
 ## GET a single REST endpoint (JSON format)
 ```sh
-$ espresso get employee/4 -m json 
+$ liveapicreator get employee/4 -m json 
 [
   {
     "@metadata": {
@@ -181,7 +181,7 @@ $ espresso get employee/4 -m json
 ## POST (insert) a JSON payload 
 
 ```sh
-$ espresso post --help
+$ liveapicreator post --help
 
   Usage: post <resource> [options]
 
@@ -193,7 +193,7 @@ $ espresso post --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-$ espresso post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
+$ liveapicreator post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
 
 POST for customer:
 I demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:9000
@@ -203,7 +203,7 @@ Request took: 61ms - # objects touched: 1
 ## PUT (update) a JSON Payload
 
 ```sh
-$ espresso put --help
+$ liveapicreator put --help
 
   Usage: put <resource> [options]
 
@@ -215,7 +215,7 @@ $ espresso put --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
     
-$ espresso put customer -j '{ "@metadata": {"checksum": "A:693190f461f5402e"  }, "name": "new posted record", "credit_limit": 8000  }'
+$ liveapicreator put customer -j '{ "@metadata": {"checksum": "A:693190f461f5402e"  }, "name": "new posted record", "credit_limit": 8000  }'
 
 PUT for customer:
 U demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:8000
@@ -225,7 +225,7 @@ Request took: 42ms - # objects touched: 1
 ## DELETE a REST resource
 
 ```sh
-$ espresso delete --help
+$ liveapicreator delete --help
 
   Usage: delete <resource> [options]
 
@@ -238,11 +238,11 @@ $ espresso delete --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-espresso delete customer -k "new posted record" --checksum "A:e86aea2e0a4e74bf" 
+liveapicreator delete customer -k "new posted record" --checksum "A:e86aea2e0a4e74bf" 
 ```
 ## Logout
 
 ```sh
-$ espresso logout
+$ liveapicreator logout
 Logout successful
 ```

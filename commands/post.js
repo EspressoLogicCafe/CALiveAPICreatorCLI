@@ -62,7 +62,7 @@ module.exports = {
 		client[verb](url + "/" + fullResource, {
 			data: cmd.json,
 			headers: {
-				Authorization: "Espresso " + apiKey + ":1"
+				Authorization: "CALiveAPICreator " + apiKey + ":1"
 			}
 		}, function(data) {
 			//console.log(data);

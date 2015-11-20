@@ -52,7 +52,7 @@ module.exports = {
 		var startTime = new Date();
 		client.get(url + "/" + objUrl + params, {
 			headers: {
-				Authorization: "Espresso " + apiKey + ":1"
+				Authorization: "CALiveAPICreator " + apiKey + ":1"
 			}
 		}, function(data) {
 			//console.log('get result: ' + JSON.stringify(data, null, 2));
