@@ -18,7 +18,7 @@ module.exports = {
 		}
 		
 		// Check that the URL looks well-formed
-		if (! url.match(/http:\/\/localhost:8080\/APIServer\/.*/) && ! url.match(/^https?:\/\/[\w-\.]+\/rest\/[\w-]+\/[\w-]+\/[\w-]+\/?$/)) {
+		if (! url.match(/http:\/\/localhost:8080\/.*/) && ! url.match(/^https?:\/\/[\w-\.]+\/rest\/[\w-]+\/[\w-]+\/[\w-]+\/?$/)) {
 			console.log('The URL you specified seems incomplete. It should be in the form:'.red);
 			console.log('   http[s]://<server>[:<port>]/rest/<account>/<project>/<api-version>'.yellow);
 			return;
