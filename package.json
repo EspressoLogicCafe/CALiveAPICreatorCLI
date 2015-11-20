@@ -1,8 +1,8 @@
 {
   "name": "liveapicreator-cli",
-  "version": "1.3.3",
+  "version": "2.0.0",
   "description": "The command line utility for CA Live API Creator from CA Technologies",
-  "main": "espresso.js",
+  "main": "liveapicreator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
