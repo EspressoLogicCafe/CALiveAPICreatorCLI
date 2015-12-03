@@ -1,6 +1,6 @@
 {
   "name": "liveapicreator-cli",
-  "version": "2.0.4",
+  "version": "2.0.8",
   "description": "The command line utility for CA Live API Creator from CA Technologies",
   "main": "liveapicreator.js",
   "scripts": {
@@ -38,7 +38,8 @@
     "easy-table": "0.3.0",
     "node-rest-client": "^1.4.1",
     "osenv": "^0.1.0",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "querystring":"^0.2.0"
   },
   "devDependencies": {},
   "repository": {

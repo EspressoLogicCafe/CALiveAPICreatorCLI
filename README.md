@@ -128,8 +128,10 @@ full_image      BLOB     16777215
 
     -h, --help                       output usage information
     -k, --pk <pk>                    Optional: primary key of the object to retrieve
-    -f, --filter <filter>            Optional: filter, e.g. "balance<1000"
-    -s, --sort <sort>                Optional: sorting order, e.g. "balance,name desc"
+    -f, --sysfilter <sysfilter>      Optional: sysfilter, e.g. "less(balance:1000) or equal(name:'SomeName')
+    -s, --sysorder <sysorder>        Optional: sorting sysorder, e.g. "(balance asc,name desc_uc)"
+    -g, --userfilter <named filter>  Optional: named filter, e.g. "namedFilter(columnName:'SomeName')
+    -t, --userorder <named order>    Optional: named sorts, e.g. "namedSort([columnName])"
     -z, --pagesize <pagesize>        Optional: up to how many rows to return per level
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson    --truncate <length>
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
@@ -176,6 +178,8 @@ $ liveapicreator get employee/4 -m json
     "name": "John Kim"
   }
 ]
+
+liveapicreator get demo:customer --userfilter "myFilter(custname:'Alpha and Sons')" --userorder "sortByName"
 ```
 
 ## POST (insert) a JSON payload 

@@ -21,18 +21,29 @@ module.exports = {
 		}
 		
 		var params = "";
-		if (cmd.filter) {
-			params = "?filter=" + querystring.escape(cmd.filter);
+		if (cmd.sysfilter) {
+			params += params.length ? "&" : "?";
+			params += "sysfilter=" + querystring.escape(cmd.sysfilter);
 		}
 		
-		if (cmd.sort) {
+		if (cmd.sysorder) {
 			params += params.length ? "&" : "?";
-			params += "order=" + querystring.escape(cmd.sort);
+			params += "sysorder=" + querystring.escape(cmd.sysorder);
+		}
+		
+		if (cmd.userfilter) {
+			params += params.length ? "&" : "?";
+			params += "userfilter=" + querystring.escape(cmd.userfilter);
+		}
+		
+		if (cmd.userorder) {
+			params += params.length ? "&" : "?";
+			params += "userorder=" + querystring.escape(cmd.userorder);
 		}
 		
 		if (cmd.pagesize) {
 			params += params.length ? "&" : "?";
-			params += "pagesize=" + cmd.pagesize;
+			params += "pagesize=" + cmd.pagesize; 
 		}
 		
 		if (cmd.format) {
@@ -48,7 +59,7 @@ module.exports = {
 		if (cmd.pk) {
 			objUrl += "/" + cmd.pk;
 		}
-		
+		console.log(objUrl + params);
 		var startTime = new Date();
 		client.get(url + "/" + objUrl + params, {
 			headers: {
