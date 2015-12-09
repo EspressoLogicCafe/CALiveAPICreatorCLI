@@ -37,7 +37,7 @@ module.exports = {
 				console.log(data.errorMessage.red);
 				return;
 			}
-			console.log("This server licensed to: " + data.company.red);
+			console.log("This server licensed to: " + data.company);
 
 			client.post(url + "/@authentication",
 				{
@@ -58,6 +58,7 @@ module.exports = {
 						alias: cmd.serverAlias,
 						loginInfo: data
 					};
+					
 					dotfile.writeToDotFile(url, fullData);
 					dotfile.setCurrentServer(url, fullData);
 					var aliasMsg = "";

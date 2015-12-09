@@ -1,12 +1,13 @@
 {
   "name": "liveapicreator-cli",
-  "version": "2.0.8",
-  "description": "The command line utility for CA Live API Creator from CA Technologies",
+  "version": "2.0.12",
+  "description": "The NodeJS command line utility for CA Live API Creator from CA Technologies",
   "main": "liveapicreator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
+    "CA Technologies",
     "liveapicreator",
     "API Server",
     "Data Explorer",

@@ -58,7 +58,7 @@ $ liveapicreator --help
 
 ## Logon to an API Server
 ```sh
-$ liveapicreator login http://localhost:8080/APIServer/rest/default/demo/v1 -u username -p mypassword
+$ liveapicreator login http://localhost:8080/rest/default/demo/v1 -u username -p mypassword
 Logging in...
 This server licensed to: Live API Creator
 Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
@@ -69,14 +69,14 @@ Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
 ```sh
 $ liveapicreator status
 
-You are currently logged in to server: https://localhost:8080/APIServer/rest/default/demo/v1 as user: demo
+You are currently logged in to server: https://localhost:8080/rest/default/demo/v1 as user: demo
 Defined aliases:
 ┌───────┬───────────────────────────────────────────────────────────┬───────┐
 │ Alias │ Server                                                    │ User  │
 ├───────┼───────────────────────────────────────────────────────────┼───────┤
-│ hr    │ https://acme.my.espressologic.com/rest/acme/hr/v2         │ hradm │
+│sample │ https://localhost:8080/rest/default/sample/v1             │sample │
 ├───────┼───────────────────────────────────────────────────────────┼───────┤
-│ demo  │ https://eval.acme.server.com/rest/acme/demo/v1            │ demo  │
+│ demo  │ https://localhost:8080/rest/default/demo/v1               │ demo  │
 └───────┴───────────────────────────────────────────────────────────┴───────┘
 ```
 
@@ -225,6 +225,7 @@ PUT for customer:
 U demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:8000
 Request took: 42ms - # objects touched: 1
 ```
+note: you can replace the checksum value with "override" - but this overrides optimistic locking so use it wisely.
 
 ## DELETE a REST resource
 
