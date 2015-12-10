@@ -45,6 +45,12 @@ module.exports = {
 			if (resName === 'tables') {
 				module.exports.describeTables(data, "Table");
 			}
+			if (resName === 'resources') {
+				module.exports.describeResources(data, "Resource");
+			}
+			if (resName === 'procedures') {
+				module.exports.describeProcs(data, "Stored Proceduers");
+			}
 			if (resName === 'views') {
 				module.exports.describeTables(data, "View");
 			}
@@ -70,6 +76,35 @@ module.exports = {
 		console.log(str.bgWhite.blue);
 	},
 	
+	describeResources: function(data, type) {
+		
+		module.exports.printHeader("All " + type + "s ");
+		var table = new Table();
+		_.each(data, function(tbl) {
+			table.cell("Type", tbl.resource_type);
+			table.cell("Version", tbl.apiVersion);
+			table.cell(type, tbl.name);
+			table.cell("href", tbl['@metadata'].href );
+			table.newRow();
+		});
+		console.log(table.toString());
+		module.exports.printHeader("# " + type + "s: " + data.length);
+	},
+	
+	describeProcs: function(data, type) {
+		
+		module.exports.printHeader("All " + type + "s ");
+		var table = new Table();
+		_.each(data, function(tbl) {
+			table.cell("Prefix", tbl.prefix);
+			table.cell("entity", tbl.entity);
+			table.cell(type, tbl.name);
+			table.cell("href", tbl['@metadata'].href );
+			table.newRow();
+		});
+		console.log(table.toString());
+		module.exports.printHeader("# " + type + "s: " + data.length);
+	},
 	describeTables: function(data, type) {
 		
 		module.exports.printHeader("All " + type + "s ");

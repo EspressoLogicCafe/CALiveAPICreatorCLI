@@ -47,7 +47,7 @@ $ liveapicreator --help
     post <resource> [options]     Insert some data
     put <resource> [options]      Update some data
     delete <resource> [options]   Delete some data
-    describe <resource> [options] Describe the specified resource, can be: tables[/tablename], views[/viewname], license, serverinfo
+    describe <resource> [options] Describe the specified resource, can be: tables[/tablename], views[/viewname], procedures, resources, license, serverinfo
 
   Options:
 

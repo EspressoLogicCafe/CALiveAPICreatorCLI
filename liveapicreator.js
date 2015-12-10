@@ -88,7 +88,7 @@ program
 
 program
 	.command('describe <resource>')
-	.description('Describe the specified resource, can be: tables[/tablename], views[/viewname], license, serverinfo')
+	.description('Describe the specified resource, can be: tables[/tablename], views[/viewname], resources, license, serverinfo')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(describe.commandDescribe);
 
