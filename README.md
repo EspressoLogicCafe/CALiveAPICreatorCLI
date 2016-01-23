@@ -20,7 +20,7 @@ $ sudo npm install -g liveapicreator-cli
 ```
 
 *Windows*: Please note that, on Windows, `npm install` will create an executable 
-called `liveapicreator` in your
+called `liveapicreator` (or `lac` as a shortcut) in your
 `<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
 want to fix that, otherwise you'll have to specify the full path to the executable.
 
