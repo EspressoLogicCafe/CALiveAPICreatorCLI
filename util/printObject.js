@@ -106,6 +106,27 @@ module.exports = {
 				module.exports.printObject(objectProps[subObjName], subObjName, indent + 2, truncate);
 			}
 		}
+	},
+	
+	printHeader: function(str) {
+		var termWidth = 100;
+		if (process.stdout.getWindowSize) { // Does not exist if output is redirected
+			termWidth = process.stdout.getWindowSize()[0];
+		}
+		
+		while (str.length < termWidth ) {
+			str += " ";
+		}
+		console.log(str.green);
+	},
+	
+	getScreenWidth: function() {
+		if (process.stdout.getWindowSize) { // Does not exist if output is redirected
+			return process.stdout.getWindowSize()[0];
+		}
+		else {
+			return 100;
+		}
 	}
 };
 
