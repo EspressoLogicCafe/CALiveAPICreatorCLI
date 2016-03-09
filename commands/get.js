@@ -46,6 +46,12 @@ module.exports = {
 			params += "pagesize=" + cmd.pagesize; 
 		}
 		
+		
+		if (cmd.offset) {
+			params += params.length ? "&" : "?";
+			params += "offset=" + cmd.offset; 
+		}
+		
 		if (cmd.format) {
 			if (cmd.format !== "text" && cmd.format !== "json" && cmd.format !== "compactjson") {
 				console.log('Invalid value for option '.red + 'format'.blue.bgWhite + 

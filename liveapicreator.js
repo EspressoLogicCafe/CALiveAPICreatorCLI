@@ -52,6 +52,7 @@ program
 	.option('-g, --userfilter <name>', 'Optional: userfilter, e.g. "userName(colname:value)')
 	.option('-t, --userorder <name>', 'Optional: userorder, e.g. "myPaidOrders"')
 	.option('-z, --pagesize <pagesize>', 'Optional: up to how many rows to return per level')
+	.option('-o, --offset <offset>', 'Optional: offset for starting next batch')
 	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
 	.option('--truncate <length>', 'Optional: truncate values at this many characters (default 20)')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
@@ -100,6 +101,7 @@ program
 	.option('--project_ident [project_ident]','The project ident that will be marked as used' )
 	.option('--file [fileName]', '[Optional] Name of file to settings for import/export (if not provided stdin/stdout used for export)')
 	.action(schema.doSchema);
+
 	
 program.parse(process.argv);
 
