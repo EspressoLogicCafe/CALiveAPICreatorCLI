@@ -93,7 +93,6 @@ program
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(describe.commandDescribe);
 
-	 
 program
 	.command('schema <list| swagger | export>')
 	.description('Administer API project options for an account.')
@@ -102,7 +101,6 @@ program
 	.option('--file [fileName]', '[Optional] Name of file to settings for import/export (if not provided stdin/stdout used for export)')
 	.action(schema.doSchema);
 
-	
 program.parse(process.argv);
 
 if (process.argv.length < 2) {

@@ -1,6 +1,6 @@
 {
   "name": "liveapicreator-cli",
-  "version": "2.0.17",
+  "version": "2.0.19",
   "description": "The NodeJS command line utility for CA Live API Creator from CA Technologies",
   "main": "liveapicreator.js",
   "scripts": {
