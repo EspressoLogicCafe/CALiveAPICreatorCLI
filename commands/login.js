@@ -126,6 +126,7 @@ module.exports = {
 		var dotDirName = dotfile.getDotDirectory(false);
 		if (dotDirName) {
 			var allFiles = fs.readdirSync(dotDirName);
+			
 			_.each(allFiles, function(f) {
 				if (f === 'currentServer.txt' || f === 'admin' || f === '.DS_Store') {
 					return;

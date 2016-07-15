@@ -69,7 +69,8 @@ module.exports = {
 		var startTime = new Date();
 		client.get(url + "/" + objUrl + params, {
 			headers: {
-				Authorization: "CALiveAPICreator " + apiKey + ":1"
+				Authorization: "CALiveAPICreator " + apiKey + ":1",
+				"Content-Type": "application/json"
 			}
 		}, function(data) {
 			//console.log('get result: ' + JSON.stringify(data, null, 2));
