@@ -5,9 +5,16 @@ var colors = require('colors');
 var _ = require('underscore');
 
 module.exports = {
-	printObject: function(obj, prefix, indent, action, truncate) {
-		var termWidth = process.stdout.getWindowSize()[0];
-		truncate = truncate ? truncate : 20;
+	printObject: function(obj, prefix, indent, action) {
+		var termWidth = 80;
+		if (process.stdout.getWindowSize) {
+			try {
+				termWidth = process.stdout.getWindowSize()[0];
+			}
+			catch(e) {
+				// Do nothing -- we're most likely in a headless environment
+			}
+		}
 
 		var objSum = "";
 		
@@ -110,6 +117,20 @@ module.exports = {
 	
 	printHeader: function(str) {
 		var termWidth = 100;
+		try{
+			if (process.stdout.getWindowSize) { // Does not exist if output is redirected
+				termWidth = process.stdout.getWindowSize()[0];
+			}
+		} catch(e){}
+		
+		while (str.length < termWidth ) {
+			str += " ";
+		}
+		console.log(str);//.bgWhite.blue
+	},
+	
+	printTrailer: function(str) {
+		var termWidth = 100;
 		if (process.stdout.getWindowSize) { // Does not exist if output is redirected
 			termWidth = process.stdout.getWindowSize()[0];
 		}
@@ -117,7 +138,8 @@ module.exports = {
 		while (str.length < termWidth ) {
 			str += " ";
 		}
-		console.log(str.green);
+		console.log(str);//.bgWhite.blue
+		console.log("");
 	},
 	
 	getScreenWidth: function() {

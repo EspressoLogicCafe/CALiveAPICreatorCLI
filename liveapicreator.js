@@ -93,6 +93,7 @@ program
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(describe.commandDescribe);
 
+
 program
 	.command('schema <list| swagger | export>')
 	.description('Administer API project options for an account.')

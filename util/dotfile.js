@@ -8,6 +8,7 @@ module.exports = {
 	
 	// Get the name of the dot directory.
 	getDotDirectory: function(createIfNotExists) {
+		//console.log("getDotDirectory = "+createIfNotExists);
 		var dotDirName = osenv.home() + "/.liveapicreator";
 		if ( ! fs.existsSync(dotDirName)) {
 			if (createIfNotExists) {
@@ -24,9 +25,16 @@ module.exports = {
 	// Write the given data to the dot file with the given URL
 	writeToDotFile: function(name, data) {
 		var dotDirName = this.getDotDirectory(true);
-		var dotFileName = dotDirName + "/" + querystring.escape(name) + "--" + data.userName;
-		var dotFile = fs.openSync(dotFileName, 'w', 0600);
-		fs.writeSync(dotFile, JSON.stringify(data, null, 2));
+		return new Promise(function(resolve,reject) {
+					var dotFileName = dotDirName + "/" + querystring.escape(name) + "--" + data.userName;
+					var dotFile = fs.openSync(dotFileName, 'w', 0600);
+					var numOfBytes = fs.writeSync(dotFile, JSON.stringify(data, null, 2));
+					if(numOfBytes>0){
+						resolve(numOfBytes);
+					}else{
+						reject("Data could'nt be written to the dot file :"+dotFileName);
+					}
+		} );
 	},
 	
 	deleteDotFile: function(url, userName) {
@@ -36,12 +44,12 @@ module.exports = {
 		}
 		var allFiles = fs.readdirSync(dotDirName);
 		_.each(allFiles, function(f) {
-			if (f === 'currentServer.txt' || f === 'admin') {
+			if (f === 'currentServer.txt' || f === 'admin' || f === '.DS_Store') {
 				return;
 			}
 			var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
 			if (fileContent.url === url && fileContent.userName === userName) {
-				console.log('Deleting login file: ' + f);
+				//console.log('Deleting login file: ' + f);
 				fs.unlinkSync(dotDirName + "/" + f);
 			}
 		});
@@ -50,15 +58,17 @@ module.exports = {
 	// Delete the dot file for the given alias.
 	// Return true if successful, false otherwise
 	deleteDotFileForAlias: function(alias) {
+		//console.log("deleteDotFileForAlias = "+ alias);
 		var dotFile = this.getDotFileForAlias(alias);
 		if ( ! dotFile) {
 			return false;
 		}
-		fs.unlinkSync(dotFile);
+		try { fs.unlinkSync(dotFile); } catch(e) {console.log(e);}
 		return true;
 	},
 	
 	getDotFileForAlias: function(alias) {
+		//console.log("getDotFileForAlias = "+ alias);
 		var dotDirName = this.getDotDirectory(false);
 		if ( ! dotDirName) {
 			return null;
@@ -68,8 +78,10 @@ module.exports = {
 			if (f === 'currentServer.txt' || f === 'admin') {
 				return false;
 			}
-			var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
-			return fileContent.alias === alias;
+			try{
+				var fileContent = JSON.parse(fs.readFileSync(dotDirName + "/" + f));
+				return fileContent.alias === alias;
+			} catch(e) {}
 		});
 		if ( ! dotFile) {
 			return null;

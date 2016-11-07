@@ -16,6 +16,14 @@ module.exports = {
 			console.log('You must specify the URL to the API Server'.red);
 			return;
 		}
+		if ( ! cmd.username) {
+			console.log('You must specify a user name'.red);
+			return;
+		}
+		if ( ! cmd.password) {
+			console.log('You must specify a password'.red);
+			return;
+		}
 		
 		// Check that the URL looks well-formed
 		if (! url.match(/http:\/\/localhost:8080\/.*/) && ! url.match(/^https?:\/\/[\w-\.]+\/rest\/[\w-]+\/[\w-]+\/[\w-]+\/?$/)) {
@@ -31,14 +39,28 @@ module.exports = {
 		
 		client.get(url + "/@license", function(data) {
 			if (typeof data === "string") {
-				data = JSON.parse(data);
+				try {
+					
+					data = JSON.parse(data);
+				}
+				catch(e) {
+					console.log(data);
+					if (data.length > 6 && data.substring(0, 6) === '<html>') {
+						console.log('The server is alive, but the URL seems to be incorrect.'.red);
+						return;
+					}
+					console.log(('Unable to parse server response - please make sure your URL is correct: ' + e).red);
+					return;
+				}
 			}
 			if (data.errorMessage) {
 				console.log(data.errorMessage.red);
 				return;
 			}
-			console.log("This server licensed to: " + data.company);
-
+					
+			console.log(("This server licensed to: " + data.company + " license_type: "+ data.license_type).green);
+			console.log(("License will expire: "+ data.license_expiration).green); 
+			process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 			client.post(url + "/@authentication",
 				{
 					data: {
@@ -59,13 +81,21 @@ module.exports = {
 						loginInfo: data
 					};
 					
-					dotfile.writeToDotFile(url, fullData);
+					dotfile.writeToDotFile(url, fullData)
+					.then(
+						// Log completion of login process.
+						function(val){	
+							console.log(('Login successful, this API key will expire on: ' + fullData.loginInfo.expiration).green);
+						}
+						)
+					.catch(
+						// Login fails if that file cannot be written. 
+						function(reason){
+							console.log(('Login failed, Reason : ' + reason).green);
+							throw "Error logging in";
+						}
+						);
 					dotfile.setCurrentServer(url, fullData);
-					var aliasMsg = "";
-					if (cmd.serverAlias) {
-						aliasMsg = " - alias for this connection is: " + cmd.serverAlias.green;
-					}
-					console.log(('Login successful, API key will expire on: ' + data.expiration).green + aliasMsg);
 				}).on('error', function(err) {
 					console.log(('ERROR: ' + err).red);
 					throw "Error logging in: " + err;
@@ -79,12 +109,12 @@ module.exports = {
 		if (url) {
 			dotfile.deleteDotFile(url);
 		}
-		else if (cmd.serverAlias) {
+		else if (cmd.serverAlias) {  
 			if (dotfile.deleteDotFileForAlias(cmd.serverAlias)) {
 				console.log(('Logout successful for alias ' + cmd.serverAlias).green);
 			}
 			else {
-				console.log(('Unknown alias: ' + cmd.serverAlias).red);
+				console.log(('Unknown alias: ' + cmd.serverAlias).yellow);
 			}
 		}
 		else {
@@ -100,7 +130,7 @@ module.exports = {
 		}
 		var login = dotfile.getLoginForAlias(serverAlias);
 		if ( ! login) {
-			console.log(('No such alias: ' + serverAlias).red);
+			console.log(('No such alias: ' + serverAlias).yellow);
 			return;
 		}
 		dotfile.setCurrentServer(login.url, login);
@@ -109,24 +139,13 @@ module.exports = {
 	
 	commandStatus: function() {
 		
-		// Show the current server, if any
-		var login = dotfile.getCurrentServer();
-		if (login && dotfile.getApiKey(login.url, login.userName)) {
-			console.log('You are currently logged in to server: ' + login.url.yellow + 
-					' as user ' + login.userName.yellow);
-		}
-		else {
-			console.log('You are not currently logged in to any server'.yellow);
-		}
-		
 		var numAliases = 0;
 		var tbl = new Table({
-			head: ['Alias', 'Server', 'User']
+			head: ['Alias', 'LAC Server', 'User']
 		});
 		var dotDirName = dotfile.getDotDirectory(false);
 		if (dotDirName) {
 			var allFiles = fs.readdirSync(dotDirName);
-			
 			_.each(allFiles, function(f) {
 				if (f === 'currentServer.txt' || f === 'admin' || f === '.DS_Store') {
 					return;
@@ -152,5 +171,16 @@ module.exports = {
 			console.log("Defined aliases:");
 			console.log(tbl.toString());
 		}
+
+		// Show the current server, if any
+		var currentLogin = dotfile.getCurrentServer();
+		if (currentLogin && dotfile.getApiKey(currentLogin.url, currentLogin.userName)) {
+			console.log('You are currently logged in to CA Live API Creator server: ' + currentLogin.url.yellow + 
+					' as user ' + currentLogin.userName.yellow);
+		}
+		else {
+			console.log('You are not currently logged in to any CA Live API Creator server'.yellow);
+		}
+		
 	}
 };
