@@ -87,8 +87,8 @@ module.exports = {
 					val = val.replace(/\n/g, "");
 			}
 			lineLength += prop.length + 2;
-			if (val.length > truncate)
-				val = val.substring(0, truncate-3) + "...";
+			if (val.length > 20)
+				val = val.substring(0, 17) + "...";
 			lineLength += val.length;
 			if (lineLength > termWidth) { continue; }
 			objSum += " " + (prop + ":").yellow + val;
@@ -106,11 +106,11 @@ module.exports = {
 			var val = objectProps[subObjName];
 			if (Array.isArray(val)) {
 				_.each(val, function(obj) {
-					module.exports.printObject(obj, subObjName, indent + 2, truncate);
+					module.exports.printObject(obj, subObjName, indent + 2);
 				});
 			}
 			else {
-				module.exports.printObject(objectProps[subObjName], subObjName, indent + 2, truncate);
+				module.exports.printObject(objectProps[subObjName], subObjName, indent + 2);
 			}
 		}
 	},
