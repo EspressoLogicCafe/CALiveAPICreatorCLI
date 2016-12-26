@@ -53,8 +53,10 @@ program
 	.option('-t, --userorder <name>', 'Optional: userorder, e.g. "myPaidOrders"')
 	.option('-z, --pagesize <pagesize>', 'Optional: up to how many rows to return per level')
 	.option('-o, --offset <offset>', 'Optional: offset for starting next batch')
+	.option('-n, --nometa <true>', 'Optional: If true, no @metadata will be returned')
 	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
 	.option('--truncate <length>', 'Optional: truncate values at this many characters (default 20)')
+	.option('-j, --jsonfile <filename>', 'Name of file to write JSON output')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(get.commandGet);
 

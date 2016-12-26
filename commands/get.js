@@ -2,7 +2,7 @@ var Client = require('node-rest-client').Client;
 var _ = require('underscore');
 var colors = require('colors');
 var querystring = require("querystring");
-
+var fs = require('fs');
 var dotfile = require('../util/dotfile.js');
 var printObject = require('../util/printObject.js');
 var login = require('../util/login.js');
@@ -51,6 +51,10 @@ module.exports = {
 			params += params.length ? "&" : "?";
 			params += "offset=" + cmd.offset; 
 		}
+		if (cmd.nometa) {
+			params += params.length ? "&" : "?";
+			params += "nometa=" + cmd.nometa; 
+		}
 		
 		if (cmd.format) {
 			if (cmd.format !== "text" && cmd.format !== "json" && cmd.format !== "compactjson") {
@@ -77,6 +81,13 @@ module.exports = {
 			var endTime = new Date();
 			if (data.errorMessage) {
 				console.log(("Error: " + data.errorMessage).red);
+				return;
+			}
+			//add file export option here.
+			if (cmd.jsonfile) {
+				var exportFile = fs.openSync(cmd.jsonfile, 'w+', 0600);
+				fs.writeSync(exportFile, JSON.stringify(data, null, 2));
+				console.log(('data has been exported to file: ' + cmd.jsonfile).green);
 				return;
 			}
 			var termWidth = 80;
