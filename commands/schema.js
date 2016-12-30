@@ -16,7 +16,7 @@ module.exports = {
 			module.exports.export(cmd);
 		}
 		else if (action === 'swagger') {
-			module.exports.export(cmd);
+			module.exports.swagger(cmd);
 		}
 		else {
 			console.log('You must specify an action: list, swagger, or export');
@@ -32,17 +32,8 @@ module.exports = {
 			return;
 		var url = loginInfo.url;
 		var apiKey = loginInfo.apiKey;
-		
-		var projIdent = cmd.project_ident;
-		if ( ! projIdent) {
-			projIdent = dotfile.getCurrentProject();
-			if ( ! projIdent) {
-				console.log('There is no current project.'.yellow);
-				return;
-			}
-		}
 
-		client.get(url + "/@tables?sysfilter=equal(project_ident:" + projIdent+")&sysorder=(entity:asc_uc,entity:desc)&pagesize=1000", {
+		client.get(url + "/@tables?sysorder=(entity:asc_uc,entity:desc)&pagesize=1000", {
 			headers: {
 				Authorization: "CALiveAPICreator " + apiKey + ":1",
 				"Content-Type": "application/json"
@@ -67,7 +58,7 @@ module.exports = {
 			else {
 				console.log(table.toString());
 			}
-			printObject.printHeader("# named sorts: " + data.length);
+			printObject.printHeader("# tables: " + data.length);
 		});
 	},
 	export: function(cmd) {
@@ -78,33 +69,22 @@ module.exports = {
 			return;
 		var url = loginInfo.url;
 		var apiKey = loginInfo.apiKey;
-		var projIdent = cmd.project_ident;
-		if ( ! projIdent) {
-			projIdent = dotfile.getCurrentProject();
-			if ( ! projIdent) {
-				console.log('There is no current project.'.yellow);
-				return;
-			}
-		}
 		
-		var filter = null;
-		if (projIdent) {
-			filter = "sysfilter=equal(project_ident:" + projIdent + ")";
+		
+		var filter = "";
+		if (cmd.prefix) {
+			filter = "/"+cmd.prefix;
 		} else {
-			console.log('Missing parameter: please specify project settings (use list) project_ident '.red);
+			console.log('Missing parameter: please specify datasource --prefix (e.g. demo, main) '.red);
 			return;
 		}
 		
-		var name = "";
-		if (cmd.name) {
-			name = "/" + cmd.name ;
-		} 
 		var toStdout = false;
 		if ( ! cmd.file) {
 			toStdout = true;
 		}
 		
-		client.get(url + "/@tables?"+ filter, {
+		client.get(url + "/@schema"+ filter, {
 			headers: {
 				Authorization: "CALiveAPICreator " + loginInfo.apiKey + ":1",
 				"Content-Type": "application/json"
@@ -116,89 +96,12 @@ module.exports = {
 				return;
 			}
 			if (data.length === 0) {
-				console.log(("Error: no such table/name").red);
+				console.log(("Error: no such datassource prefix").red);
 				return;
 			}
-			var table = [];
-			_.each(data, function(p) {
-
-				client.get(url + "/@tables/"+p.name, {
-					headers: {
-						Authorization: "CALiveAPICreator " + loginInfo.apiKey + ":1",
-						"Content-Type": "application/json"
-					}
-				}, function(details) {
-					if (details.errorMessage) {
-						console.log(("Error: " + details.errorMessage).red);
-						return;
-					}
-					if (details.length === 0) {
-						console.log(("Error: no such columns").red);
-						return;
-					}
-					var keys = details.primaryKey.columns;
-					var det = '-- Phase Create \nCREATE TABLE "'+details.entity + '"( \n';
-					var sep = "";
-					var datatype,nullable,key;
-					//console.log('get result: ' + JSON.stringify(details, null, 2));
-						_.each(details.columns, function(c) {
-							key = "";
-							quote = ""; // '"'
-							for(var i = 0; i < keys.length ; i++){
-								if(keys[i].name == c.name)
-									key = " PRIMARY KEY";
-							}
-							if ( c.type == 'VARCHAR' || c.type == 'CHAR'){
-								datatype = c.type +"("+c.size +")";
-							} else if ( c.type == 'DECIMAL'){
-								datatype = c.type +"("+c.size +","+ c.scale+")";
-							} else if ( c.type == 'BIGINT'){
-								datatype = c.type;
-							} else {
-								datatype = c.type;
-							}
-							nullable = c.nullable?"NULL ":"NOT NULL";
-							det += sep += quote +c.dbName + quote + " " + datatype + ' '  + nullable + key +  '\n';
-							//table.cell("columns", c.name +" " + c.type + c.size );
-							//table.newRow();
-							sep = ",";
-
-						});
-						det += ") \n/ \n";
-						var constr = "";
-						_.each(details.parents, function(fk) {
-						 //Add foreign keys
-						 constr += '\n';
-						  constr += '-- Phase Constrain\n';
-						  constr += 'ALTER TABLE "'+details.entity+'" \n';
-						  constr += '  ADD CONSTRAINT "'+fk.name +'" \n';
-						  constr += '  FOREIGN KEY (';
-						  	var sep = "";
-							for(var idx = 0 ; idx < fk.child_columns.length ; idx ++){
-								constr += sep + '"' + fk.child_columns[idx] +'"';
-								sep = ",";
-							}
-							constr += ') \n';
-							var parent = fk.parent_table;
-							var idx = parent.indexOf(":");
-						  constr += '  REFERENCES "'+parent.substring(idx + 1) +'" (';
-							  var sep = "";
-								for(var idx = 0 ; idx < fk.parent_columns.length ; idx ++){
-									constr += sep + '"' + fk.parent_columns[idx] +'"';
-									sep = ",";
-								}
-								constr += ') \n';
-						  constr += '  ON DELETE CASCADE ON UPDATE RESTRICT \n';
-						  constr += '/\n';
-						
-						});
-					console.log(det);
-					console.log(constr);
-				});
-					
-			});
+			
 			if (toStdout) {
-				console.log(JSON.stringify(table.toString(), null, 2));
+				console.log(JSON.stringify(data, null, 2));
 			} else {
 				var exportFile = fs.openSync(cmd.file, 'w+', 0600);
 				fs.writeSync(exportFile, JSON.stringify(data, null, 2));
@@ -214,30 +117,13 @@ module.exports = {
 			return;
 		var url = loginInfo.url;
 		var apiKey = loginInfo.apiKey;
-		var projIdent = cmd.project_ident;
-		if ( ! projIdent) {
-			projIdent = dotfile.getCurrentProject();
-			if ( ! projIdent) {
-				console.log('There is no current project.'.yellow);
-				return;
-			}
-		}
 		
-		var filter = null;
-		if (projIdent) {
-			filter = "sysfilter=equal(project_ident:" + projIdent + ")";
-		} else {
-			console.log('Missing parameter: please specify project settings (use list) project_ident '.red);
-			return;
-		}
-		
-	
 		var toStdout = false;
 		if ( ! cmd.file) {
 			toStdout = true;
 		}
 		
-		client.get(url + "/@docs?"+ filter, {
+		client.get(url + "/@docs", {
 			headers: {
 				Authorization: "CALiveAPICreator " + loginInfo.apiKey + ":1",
 				"Content-Type": "application/json"
@@ -252,7 +138,6 @@ module.exports = {
 				console.log(("Error: no swagger doc found").red);
 				return;
 			}
-			
 			
 			if (toStdout) {
 				console.log(JSON.stringify(data, null, 2));

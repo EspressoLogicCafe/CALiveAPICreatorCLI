@@ -97,9 +97,8 @@ program
 
 
 program
-	.command('schema <list| swagger | export>')
+	.command('schema <list|swagger|export>')
 	.description('Administer API project options for an account.')
-	.option('--entity [name]','This is the entity name for the specific table')
 	.option('--prefix [name]','This is the datasource prefix for @schema')
 	.option('--project_ident [project_ident]','The project ident that will be marked as used' )
 	.option('--file [fileName]', '[Optional] Name of file to settings for import/export (if not provided stdin/stdout used for export)')
