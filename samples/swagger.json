@@ -1,0 +1,6089 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Demo",
+    "description": "Welcome examples.",
+    "version": "v1"
+  },
+  "host": "localhost:8080",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/rest/default/demo/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "AllCustomers",
+      "description": "Query for all customers"
+    },
+    {
+      "name": "CustomerBusinessObject",
+      "description": "all customer attributes and related child data"
+    },
+    {
+      "name": "CustomerJSOrdersREST",
+      "description": "RESTful Orders from a REST call"
+    },
+    {
+      "name": "Customers",
+      "description": "API example - illustrates attribute aliasing / projection"
+    },
+    {
+      "name": "MDBDemoCustomers",
+      "description": "Multiple Database join, using Virtual Foreign Key (see Data Sources > Relatio..."
+    },
+    {
+      "name": "OrderMergeInsertProduct",
+      "description": "PUT this object to see the MERGE_INSERT / LOOKUP facility in action."
+    },
+    {
+      "name": "Products",
+      "description": "Query for all products"
+    },
+    {
+      "name": "PurchaseOrders",
+      "description": "Query for all orders with line items"
+    },
+    {
+      "name": "PurchaseOrdersFreeSQL",
+      "description": "Using FreeSQL - you can create complex sql statements"
+    },
+    {
+      "name": "demo:customer",
+      "description": null
+    },
+    {
+      "name": "demo:employee",
+      "description": null
+    },
+    {
+      "name": "demo:employee_picture",
+      "description": null
+    },
+    {
+      "name": "demo:LineItem",
+      "description": null
+    },
+    {
+      "name": "demo:product",
+      "description": null
+    },
+    {
+      "name": "demo:PurchaseOrder",
+      "description": null
+    },
+    {
+      "name": "demo:purchaseorder_audit",
+      "description": null
+    },
+    {
+      "name": "finance:orders",
+      "description": null
+    },
+    {
+      "name": "demo:customers_owing",
+      "description": null
+    },
+    {
+      "name": "demo:employee_with_picture",
+      "description": null
+    },
+    {
+      "name": "demo:LineItemJoinProduct",
+      "description": null
+    }
+  ],
+  "paths": {
+    "/AllCustomers/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Retrieve a specific AllCustomers object",
+        "description": "# Retrieve a specific AllCustomers object\nQuery for all customers",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one AllCustomers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AllCustomers"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Update a specific AllCustomers object",
+        "description": "# Update a specific AllCustomers object\nQuery for all customers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Delete a specific AllCustomers object",
+        "description": "# Delete a specific AllCustomers object\nQuery for all customers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/AllCustomers": {
+      "get": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Retrieve zero or more AllCustomers objects",
+        "description": "# Retrieve zero or more AllCustomers objects\nQuery for all customers",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more AllCustomers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AllCustomers"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Insert zero or more AllCustomers objects",
+        "description": "# Insert zero or more AllCustomers objects\nQuery for all customers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "AllCustomers"
+        ],
+        "summary": "Update zero or more AllCustomers objects",
+        "description": "# Update zero or more AllCustomers objects\nQuery for all customers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/CustomerBusinessObject/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Retrieve a specific CustomerBusinessObject object",
+        "description": "# Retrieve a specific CustomerBusinessObject object\nall customer attributes and related child data",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one CustomerBusinessObject object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerBusinessObject"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Update a specific CustomerBusinessObject object",
+        "description": "# Update a specific CustomerBusinessObject object\nall customer attributes and related child data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Delete a specific CustomerBusinessObject object",
+        "description": "# Delete a specific CustomerBusinessObject object\nall customer attributes and related child data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/CustomerBusinessObject": {
+      "get": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Retrieve zero or more CustomerBusinessObject objects",
+        "description": "# Retrieve zero or more CustomerBusinessObject objects\nall customer attributes and related child data",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more CustomerBusinessObject object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerBusinessObject"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Insert zero or more CustomerBusinessObject objects",
+        "description": "# Insert zero or more CustomerBusinessObject objects\nall customer attributes and related child data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "CustomerBusinessObject"
+        ],
+        "summary": "Update zero or more CustomerBusinessObject objects",
+        "description": "# Update zero or more CustomerBusinessObject objects\nall customer attributes and related child data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/CustomerJSOrdersREST/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Retrieve a specific CustomerJSOrdersREST object",
+        "description": "# Retrieve a specific CustomerJSOrdersREST object\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one CustomerJSOrdersREST object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerJSOrdersREST"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Update a specific CustomerJSOrdersREST object",
+        "description": "# Update a specific CustomerJSOrdersREST object\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Delete a specific CustomerJSOrdersREST object",
+        "description": "# Delete a specific CustomerJSOrdersREST object\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/CustomerJSOrdersREST": {
+      "get": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Retrieve zero or more CustomerJSOrdersREST objects",
+        "description": "# Retrieve zero or more CustomerJSOrdersREST objects\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more CustomerJSOrdersREST object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CustomerJSOrdersREST"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Insert zero or more CustomerJSOrdersREST objects",
+        "description": "# Insert zero or more CustomerJSOrdersREST objects\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "CustomerJSOrdersREST"
+        ],
+        "summary": "Update zero or more CustomerJSOrdersREST objects",
+        "description": "# Update zero or more CustomerJSOrdersREST objects\nRESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/Customers/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve a specific Customers object",
+        "description": "# Retrieve a specific Customers object\nAPI example - illustrates attribute aliasing / projection",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one Customers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customers"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update a specific Customers object",
+        "description": "# Update a specific Customers object\nAPI example - illustrates attribute aliasing / projection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Delete a specific Customers object",
+        "description": "# Delete a specific Customers object\nAPI example - illustrates attribute aliasing / projection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/Customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Retrieve zero or more Customers objects",
+        "description": "# Retrieve zero or more Customers objects\nAPI example - illustrates attribute aliasing / projection",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more Customers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Customers"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Insert zero or more Customers objects",
+        "description": "# Insert zero or more Customers objects\nAPI example - illustrates attribute aliasing / projection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update zero or more Customers objects",
+        "description": "# Update zero or more Customers objects\nAPI example - illustrates attribute aliasing / projection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/MDBDemoCustomers/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Retrieve a specific MDBDemoCustomers object",
+        "description": "# Retrieve a specific MDBDemoCustomers object\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one MDBDemoCustomers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MDBDemoCustomers"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Update a specific MDBDemoCustomers object",
+        "description": "# Update a specific MDBDemoCustomers object\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Delete a specific MDBDemoCustomers object",
+        "description": "# Delete a specific MDBDemoCustomers object\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/MDBDemoCustomers": {
+      "get": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Retrieve zero or more MDBDemoCustomers objects",
+        "description": "# Retrieve zero or more MDBDemoCustomers objects\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more MDBDemoCustomers object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MDBDemoCustomers"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Insert zero or more MDBDemoCustomers objects",
+        "description": "# Insert zero or more MDBDemoCustomers objects\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "MDBDemoCustomers"
+        ],
+        "summary": "Update zero or more MDBDemoCustomers objects",
+        "description": "# Update zero or more MDBDemoCustomers objects\nMultiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/OrderMergeInsertProduct/{order_number}": {
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Retrieve a specific OrderMergeInsertProduct object",
+        "description": "# Retrieve a specific OrderMergeInsertProduct object\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one OrderMergeInsertProduct object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderMergeInsertProduct"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Update a specific OrderMergeInsertProduct object",
+        "description": "# Update a specific OrderMergeInsertProduct object\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Delete a specific OrderMergeInsertProduct object",
+        "description": "# Delete a specific OrderMergeInsertProduct object\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/OrderMergeInsertProduct": {
+      "get": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Retrieve zero or more OrderMergeInsertProduct objects",
+        "description": "# Retrieve zero or more OrderMergeInsertProduct objects\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more OrderMergeInsertProduct object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OrderMergeInsertProduct"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Insert zero or more OrderMergeInsertProduct objects",
+        "description": "# Insert zero or more OrderMergeInsertProduct objects\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "OrderMergeInsertProduct"
+        ],
+        "summary": "Update zero or more OrderMergeInsertProduct objects",
+        "description": "# Update zero or more OrderMergeInsertProduct objects\nPUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/Products/{product_number}": {
+      "parameters": [
+        {
+          "name": "product_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Retrieve a specific Products object",
+        "description": "# Retrieve a specific Products object\nQuery for all products",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one Products object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Products"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Update a specific Products object",
+        "description": "# Update a specific Products object\nQuery for all products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Delete a specific Products object",
+        "description": "# Delete a specific Products object\nQuery for all products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/Products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Retrieve zero or more Products objects",
+        "description": "# Retrieve zero or more Products objects\nQuery for all products",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more Products object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Products"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Insert zero or more Products objects",
+        "description": "# Insert zero or more Products objects\nQuery for all products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Update zero or more Products objects",
+        "description": "# Update zero or more Products objects\nQuery for all products",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/PurchaseOrders/{order_number}": {
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Retrieve a specific PurchaseOrders object",
+        "description": "# Retrieve a specific PurchaseOrders object\nQuery for all orders with line items",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one PurchaseOrders object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseOrders"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Update a specific PurchaseOrders object",
+        "description": "# Update a specific PurchaseOrders object\nQuery for all orders with line items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Delete a specific PurchaseOrders object",
+        "description": "# Delete a specific PurchaseOrders object\nQuery for all orders with line items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/PurchaseOrders": {
+      "get": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Retrieve zero or more PurchaseOrders objects",
+        "description": "# Retrieve zero or more PurchaseOrders objects\nQuery for all orders with line items",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more PurchaseOrders object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseOrders"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Insert zero or more PurchaseOrders objects",
+        "description": "# Insert zero or more PurchaseOrders objects\nQuery for all orders with line items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "PurchaseOrders"
+        ],
+        "summary": "Update zero or more PurchaseOrders objects",
+        "description": "# Update zero or more PurchaseOrders objects\nQuery for all orders with line items",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/PurchaseOrdersFreeSQL": {
+      "get": {
+        "tags": [
+          "PurchaseOrdersFreeSQL"
+        ],
+        "summary": "Retrieve zero or more PurchaseOrdersFreeSQL objects",
+        "description": "# Retrieve zero or more PurchaseOrdersFreeSQL objects\nUsing FreeSQL - you can create complex sql statements. This is a group by find sales reps with large quantity (>20) lineitem sales.",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more PurchaseOrdersFreeSQL object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PurchaseOrdersFreeSQL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demo:customer/{name}": {
+      "parameters": [
+        {
+          "name": "name",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Retrieve a specific demo:customer object",
+        "description": "# Retrieve a specific demo:customer object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:customer object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:customer"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Update a specific demo:customer object",
+        "description": "# Update a specific demo:customer object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Delete a specific demo:customer object",
+        "description": "# Delete a specific demo:customer object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:customer": {
+      "get": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Retrieve zero or more demo:customer objects",
+        "description": "# Retrieve zero or more demo:customer objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:customer object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:customer"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Insert zero or more demo:customer objects",
+        "description": "# Insert zero or more demo:customer objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:customer"
+        ],
+        "summary": "Update zero or more demo:customer objects",
+        "description": "# Update zero or more demo:customer objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:employee/{employee_id}": {
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Retrieve a specific demo:employee object",
+        "description": "# Retrieve a specific demo:employee object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:employee object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:employee"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Update a specific demo:employee object",
+        "description": "# Update a specific demo:employee object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Delete a specific demo:employee object",
+        "description": "# Delete a specific demo:employee object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:employee": {
+      "get": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Retrieve zero or more demo:employee objects",
+        "description": "# Retrieve zero or more demo:employee objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:employee object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:employee"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Insert zero or more demo:employee objects",
+        "description": "# Insert zero or more demo:employee objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:employee"
+        ],
+        "summary": "Update zero or more demo:employee objects",
+        "description": "# Update zero or more demo:employee objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:employee_picture/{employee_id}": {
+      "parameters": [
+        {
+          "name": "employee_id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Retrieve a specific demo:employee_picture object",
+        "description": "# Retrieve a specific demo:employee_picture object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:employee_picture object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:employee_picture"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Update a specific demo:employee_picture object",
+        "description": "# Update a specific demo:employee_picture object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Delete a specific demo:employee_picture object",
+        "description": "# Delete a specific demo:employee_picture object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:employee_picture": {
+      "get": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Retrieve zero or more demo:employee_picture objects",
+        "description": "# Retrieve zero or more demo:employee_picture objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:employee_picture object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:employee_picture"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Insert zero or more demo:employee_picture objects",
+        "description": "# Insert zero or more demo:employee_picture objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:employee_picture"
+        ],
+        "summary": "Update zero or more demo:employee_picture objects",
+        "description": "# Update zero or more demo:employee_picture objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:LineItem/{lineitem_id}": {
+      "parameters": [
+        {
+          "name": "lineitem_id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Retrieve a specific demo:LineItem object",
+        "description": "# Retrieve a specific demo:LineItem object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:LineItem object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:LineItem"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Update a specific demo:LineItem object",
+        "description": "# Update a specific demo:LineItem object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Delete a specific demo:LineItem object",
+        "description": "# Delete a specific demo:LineItem object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:LineItem": {
+      "get": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Retrieve zero or more demo:LineItem objects",
+        "description": "# Retrieve zero or more demo:LineItem objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:LineItem object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:LineItem"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Insert zero or more demo:LineItem objects",
+        "description": "# Insert zero or more demo:LineItem objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:LineItem"
+        ],
+        "summary": "Update zero or more demo:LineItem objects",
+        "description": "# Update zero or more demo:LineItem objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:product/{product_number}": {
+      "parameters": [
+        {
+          "name": "product_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Retrieve a specific demo:product object",
+        "description": "# Retrieve a specific demo:product object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:product object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:product"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Update a specific demo:product object",
+        "description": "# Update a specific demo:product object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Delete a specific demo:product object",
+        "description": "# Delete a specific demo:product object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:product": {
+      "get": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Retrieve zero or more demo:product objects",
+        "description": "# Retrieve zero or more demo:product objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:product object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:product"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Insert zero or more demo:product objects",
+        "description": "# Insert zero or more demo:product objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:product"
+        ],
+        "summary": "Update zero or more demo:product objects",
+        "description": "# Update zero or more demo:product objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:PurchaseOrder/{order_number}": {
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Retrieve a specific demo:PurchaseOrder object",
+        "description": "# Retrieve a specific demo:PurchaseOrder object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:PurchaseOrder object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:PurchaseOrder"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Update a specific demo:PurchaseOrder object",
+        "description": "# Update a specific demo:PurchaseOrder object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Delete a specific demo:PurchaseOrder object",
+        "description": "# Delete a specific demo:PurchaseOrder object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:PurchaseOrder": {
+      "get": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Retrieve zero or more demo:PurchaseOrder objects",
+        "description": "# Retrieve zero or more demo:PurchaseOrder objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:PurchaseOrder object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:PurchaseOrder"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Insert zero or more demo:PurchaseOrder objects",
+        "description": "# Insert zero or more demo:PurchaseOrder objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:PurchaseOrder"
+        ],
+        "summary": "Update zero or more demo:PurchaseOrder objects",
+        "description": "# Update zero or more demo:PurchaseOrder objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:purchaseorder_audit/{audit_number}": {
+      "parameters": [
+        {
+          "name": "audit_number",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Retrieve a specific demo:purchaseorder_audit object",
+        "description": "# Retrieve a specific demo:purchaseorder_audit object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one demo:purchaseorder_audit object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:purchaseorder_audit"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Update a specific demo:purchaseorder_audit object",
+        "description": "# Update a specific demo:purchaseorder_audit object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Delete a specific demo:purchaseorder_audit object",
+        "description": "# Delete a specific demo:purchaseorder_audit object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:purchaseorder_audit": {
+      "get": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Retrieve zero or more demo:purchaseorder_audit objects",
+        "description": "# Retrieve zero or more demo:purchaseorder_audit objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:purchaseorder_audit object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:purchaseorder_audit"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Insert zero or more demo:purchaseorder_audit objects",
+        "description": "# Insert zero or more demo:purchaseorder_audit objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "demo:purchaseorder_audit"
+        ],
+        "summary": "Update zero or more demo:purchaseorder_audit objects",
+        "description": "# Update zero or more demo:purchaseorder_audit objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/finance:orders/{ident}": {
+      "parameters": [
+        {
+          "name": "ident",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }
+      ],
+      "get": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Retrieve a specific finance:orders object",
+        "description": "# Retrieve a specific finance:orders object\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or one finance:orders object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/finance:orders"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Update a specific finance:orders object",
+        "description": "# Update a specific finance:orders object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Delete a specific finance:orders object",
+        "description": "# Delete a specific finance:orders object\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/checksum"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/ignoredeleted"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/finance:orders": {
+      "get": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Retrieve zero or more finance:orders objects",
+        "description": "# Retrieve zero or more finance:orders objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more finance:orders object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/finance:orders"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Insert zero or more finance:orders objects",
+        "description": "# Insert zero or more finance:orders objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "finance:orders"
+        ],
+        "summary": "Update zero or more finance:orders objects",
+        "description": "# Update zero or more finance:orders objects\nnull",
+        "parameters": [
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/txsummary"
+          },
+          {
+            "$ref": "#/parameters/rulesummary"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          }
+        ]
+      }
+    },
+    "/demo:customers_owing": {
+      "get": {
+        "tags": [
+          "demo:customers_owing"
+        ],
+        "summary": "Retrieve zero or more demo:customers_owing objects",
+        "description": "# Retrieve zero or more demo:customers_owing objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:customers_owing object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:customers_owing"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demo:employee_with_picture": {
+      "get": {
+        "tags": [
+          "demo:employee_with_picture"
+        ],
+        "summary": "Retrieve zero or more demo:employee_with_picture objects",
+        "description": "# Retrieve zero or more demo:employee_with_picture objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:employee_with_picture object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:employee_with_picture"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/demo:LineItemJoinProduct": {
+      "get": {
+        "tags": [
+          "demo:LineItemJoinProduct"
+        ],
+        "summary": "Retrieve zero or more demo:LineItemJoinProduct objects",
+        "description": "# Retrieve zero or more demo:LineItemJoinProduct objects\nnull",
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/pagesize"
+          },
+          {
+            "$ref": "#/parameters/offset"
+          },
+          {
+            "$ref": "#/parameters/logging"
+          },
+          {
+            "$ref": "#/parameters/debug"
+          },
+          {
+            "$ref": "#/parameters/downloadName"
+          },
+          {
+            "$ref": "#/parameters/deferred"
+          },
+          {
+            "$ref": "#/parameters/inline"
+          },
+          {
+            "$ref": "#/parameters/inlinelimit"
+          },
+          {
+            "$ref": "#/parameters/procrowlimit"
+          },
+          {
+            "$ref": "#/parameters/procinlinelimit"
+          },
+          {
+            "$ref": "#/parameters/chunksize"
+          },
+          {
+            "$ref": "#/parameters/auth"
+          },
+          {
+            "$ref": "#/parameters/filter"
+          },
+          {
+            "$ref": "#/parameters/sysfilter"
+          },
+          {
+            "$ref": "#/parameters/order"
+          },
+          {
+            "$ref": "#/parameters/sysorder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Zero or more demo:LineItemJoinProduct object",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/demo:LineItemJoinProduct"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AllCustomers": {
+      "type": "object",
+      "description": "Query for all customers",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "CustomerBusinessObject": {
+      "type": "object",
+      "description": "all customer attributes and related child data",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "credit_limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "Orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerBusinessObject.Orders"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "credit_limit"
+      ]
+    },
+    "CustomerBusinessObject.Orders": {
+      "type": "object",
+      "description": "Orders of Customer",
+      "properties": {
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "salesrep_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerBusinessObject.Orders.LineItems"
+          }
+        }
+      },
+      "required": [
+        "order_number",
+        "paid",
+        "customer_name"
+      ]
+    },
+    "CustomerBusinessObject.Orders.LineItems": {
+      "type": "object",
+      "description": "LineItems of Order",
+      "properties": {
+        "lineitem_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "qty_ordered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "Product": {
+          "$ref": "#/definitions/CustomerBusinessObject.Orders.LineItems.Product"
+        },
+        "OrderAudits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerBusinessObject.Orders.LineItems.OrderAudits"
+          }
+        }
+      },
+      "required": [
+        "lineitem_id",
+        "product_number",
+        "order_number",
+        "qty_ordered"
+      ]
+    },
+    "CustomerBusinessObject.Orders.LineItems.Product": {
+      "type": "object",
+      "description": "Product for LineItem",
+      "properties": {
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "icon": {
+          "type": "binary"
+        },
+        "full_image": {
+          "type": "binary"
+        }
+      },
+      "required": [
+        "product_number",
+        "name",
+        "price"
+      ]
+    },
+    "CustomerBusinessObject.Orders.LineItems.OrderAudits": {
+      "type": "object",
+      "description": "Audits of Order",
+      "properties": {
+        "audit_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "audit_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "audit_number",
+        "customer_name"
+      ]
+    },
+    "CustomerJSOrdersREST": {
+      "type": "object",
+      "description": "RESTful Orders from a REST call\n -- click Detail tab\nMake a SQL Call for each customer and then make a REST call to another REST Endpoint to create a compound document resource.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "OrdersRest": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerJSOrdersREST.OrdersRest"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "Customers": {
+      "type": "object",
+      "description": "API example - illustrates attribute aliasing / projection",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "CreditLimit": {
+          "type": "number",
+          "format": "double"
+        },
+        "Orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Customers.Orders"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "CreditLimit"
+      ]
+    },
+    "Customers.Orders": {
+      "type": "object",
+      "description": "API example",
+      "properties": {
+        "OrderNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "Paid": {
+          "type": "boolean"
+        },
+        "Notes": {
+          "type": "string"
+        },
+        "LineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Customers.Orders.LineItems"
+          }
+        }
+      },
+      "required": [
+        "OrderNumber",
+        "Paid"
+      ]
+    },
+    "Customers.Orders.LineItems": {
+      "type": "object",
+      "description": "API example",
+      "properties": {
+        "ProductNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "OrderNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Price": {
+          "type": "number",
+          "format": "double"
+        },
+        "Amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "Product": {
+          "$ref": "#/definitions/Customers.Orders.LineItems.Product"
+        }
+      },
+      "required": [
+        "ProductNumber",
+        "OrderNumber",
+        "Quantity"
+      ]
+    },
+    "Customers.Orders.LineItems.Product": {
+      "type": "object",
+      "description": "Query for product",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "number",
+          "format": "double"
+        },
+        "ProductId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ProductDetailLink": {
+          "$ref": "#/definitions/Customers.Orders.LineItems.Product.ProductDetailLink"
+        }
+      },
+      "required": [
+        "Name",
+        "Price",
+        "ProductId"
+      ]
+    },
+    "Customers.Orders.LineItems.Product.ProductDetailLink": {
+      "type": "object",
+      "description": "Product Detail",
+      "properties": {
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "icon": {
+          "type": "binary"
+        },
+        "full_image": {
+          "type": "binary"
+        }
+      },
+      "required": [
+        "product_number",
+        "name",
+        "price"
+      ]
+    },
+    "MDBDemoCustomers": {
+      "type": "object",
+      "description": "Multiple Database join, using Virtual Foreign Key (see Data Sources > Relationships).\n\nNote: this database is provided with your account.  The associated project illustrates many rule examples (see http://ca-doc.espressologic.com/docs/tutorial).  It is provided for appliances, and , and can be loaded into Eval accounts as described in the link above.",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "credit_limit": {
+          "type": "number",
+          "format": "double"
+        },
+        "financeOrders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MDBDemoCustomers.financeOrders"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "credit_limit"
+      ]
+    },
+    "MDBDemoCustomers.financeOrders": {
+      "type": "object",
+      "properties": {
+        "cloned_from_order_ident": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ident": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "amountTotal": {
+          "type": "number",
+          "format": "double"
+        },
+        "amountDiscounted": {
+          "type": "number",
+          "format": "double"
+        },
+        "amountPaid": {
+          "type": "number",
+          "format": "double"
+        },
+        "amountNn_paid": {
+          "type": "number",
+          "format": "double"
+        },
+        "is_ready": {
+          "type": "boolean"
+        },
+        "approving_officer": {
+          "type": "string"
+        },
+        "officer_item_usage_approval": {
+          "type": "string"
+        },
+        "unresolved_usage_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "ident"
+      ]
+    },
+    "OrderMergeInsertProduct": {
+      "type": "object",
+      "description": "PUT this object to see the MERGE_INSERT / LOOKUP facility in action.\n{ \"@metadata\": { \"action\": \"INSERT\" }, \"Customer\": { \"@metadata\": { \"action\": \"LOOKUP\", \"key\": \"name\"}, \"Name\": \"Alpha and Sons\"}, \"Product\": {\"action\": \"MERGE_INSERT\", \"key=\"PRODUCT_NAME\"}, \"Name\": \"Bolts\"}",
+      "properties": {
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "salesrep_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Customer": {
+          "$ref": "#/definitions/OrderMergeInsertProduct.Customer"
+        },
+        "Items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderMergeInsertProduct.Items"
+          }
+        }
+      },
+      "required": [
+        "order_number",
+        "paid",
+        "customer_name"
+      ]
+    },
+    "OrderMergeInsertProduct.Customer": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "OrderMergeInsertProduct.Items": {
+      "type": "object",
+      "properties": {
+        "Quantity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Product": {
+          "$ref": "#/definitions/OrderMergeInsertProduct.Items.Product"
+        }
+      },
+      "required": [
+        "Quantity"
+      ]
+    },
+    "OrderMergeInsertProduct.Items.Product": {
+      "type": "object",
+      "properties": {
+        "ProductName": {
+          "type": "string"
+        },
+        "Price": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "ProductName",
+        "Price"
+      ]
+    },
+    "Products": {
+      "type": "object",
+      "description": "Query for all products",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name",
+        "price"
+      ]
+    },
+    "PurchaseOrders": {
+      "type": "object",
+      "description": "Query for all orders with line items",
+      "properties": {
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "salesrep_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LineItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PurchaseOrders.LineItems"
+          }
+        }
+      },
+      "required": [
+        "order_number",
+        "paid",
+        "customer_name"
+      ]
+    },
+    "PurchaseOrders.LineItems": {
+      "type": "object",
+      "description": "API example",
+      "properties": {
+        "lineitem_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "qty_ordered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "lineitem_id",
+        "product_number",
+        "order_number",
+        "qty_ordered"
+      ]
+    },
+    "demo:customer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "credit_limit": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name",
+        "credit_limit"
+      ]
+    },
+    "demo:employee": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "login": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "employee_id",
+        "login",
+        "name"
+      ]
+    },
+    "demo:employee_picture": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "icon": {
+          "type": "binary"
+        },
+        "picture": {
+          "type": "binary"
+        },
+        "voice": {
+          "type": "binary"
+        },
+        "resume": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "employee_id"
+      ]
+    },
+    "demo:LineItem": {
+      "type": "object",
+      "properties": {
+        "lineitem_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "qty_ordered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "product_price": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "lineitem_id",
+        "product_number",
+        "order_number",
+        "qty_ordered"
+      ]
+    },
+    "demo:product": {
+      "type": "object",
+      "properties": {
+        "product_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "icon": {
+          "type": "binary"
+        },
+        "full_image": {
+          "type": "binary"
+        }
+      },
+      "required": [
+        "product_number",
+        "name",
+        "price"
+      ]
+    },
+    "demo:PurchaseOrder": {
+      "type": "object",
+      "properties": {
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "salesrep_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "required": [
+        "order_number",
+        "paid",
+        "customer_name"
+      ]
+    },
+    "demo:purchaseorder_audit": {
+      "type": "object",
+      "properties": {
+        "audit_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order_number": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "paid": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "audit_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "customer_name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "audit_number",
+        "customer_name"
+      ]
+    },
+    "finance:orders": {
+      "type": "object",
+      "properties": {
+        "ident": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "amount_total": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount_discounted": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount_paid": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount_un_paid": {
+          "type": "number",
+          "format": "double"
+        },
+        "is_ready": {
+          "type": "boolean"
+        },
+        "approving_officer": {
+          "type": "string"
+        },
+        "officer_item_usage_approval": {
+          "type": "string"
+        },
+        "unresolved_usage_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "placed_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "due_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "salesrep_name": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        },
+        "cloned_from_order_ident": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "item_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "empsales_year": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "empsales_month": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "ident"
+      ]
+    },
+    "demo:customers_owing": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "credit_limit": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "name",
+        "credit_limit"
+      ]
+    },
+    "demo:employee_with_picture": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "login": {
+          "type": "string"
+        },
+        "picture": {
+          "type": "binary"
+        }
+      },
+      "required": [
+        "employee_id",
+        "login"
+      ]
+    },
+    "demo:LineItemJoinProduct": {
+      "type": "object",
+      "properties": {
+        "LineItemId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ProductNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "OrderNumber": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "QuantityOrdered": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ProductPriceCopy": {
+          "type": "number",
+          "format": "double"
+        },
+        "ProductPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "ProductName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "LineItemId",
+        "ProductNumber",
+        "OrderNumber",
+        "QuantityOrdered",
+        "ProductPrice",
+        "ProductName"
+      ]
+    }
+  },
+  "parameters": {
+    "auth": {
+      "name": "auth",
+      "description": "Auth Token: this is a convenience so you can do GET etc. with the value in a URL",
+      "type": "string",
+      "in": "query",
+      "allowEmptyValue": false
+    },
+    "filter": {
+      "name": "filter",
+      "description": "Arbitrary search criteria",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "sysfilter": {
+      "name": "sysfilter",
+      "description": "Structured search criteria",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "order": {
+      "name": "order",
+      "description": "Order by attributes, eg: name,age desc",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "sysorder": {
+      "name": "sysorder",
+      "description": "Structured sort",
+      "in": "query",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "checksum": {
+      "name": "checksum",
+      "description": "The checksum for the object to deleted (can be _override_ to bypass optimistic locking",
+      "in": "query",
+      "type": "string",
+      "required": true,
+      "allowEmptyValue": false
+    },
+    "txsummary": {
+      "name": "txsummary",
+      "description": "If true, the response will include a description of all database objects updated during the transaction.  Default value is 'true'",
+      "in": "query",
+      "type": "boolean",
+      "allowEmptyValue": false
+    },
+    "rulesummary": {
+      "name": "rulesummary",
+      "description": "If true. the response will include a description of all the rules executed during the transaction",
+      "in": "query",
+      "type": "boolean",
+      "allowEmptyValue": false
+    },
+    "logging": {
+      "name": "logging",
+      "description": "Sets the logging levels for this request only",
+      "in": "query",
+      "type": "string",
+      "allowEmptyValue": false
+    },
+    "debug": {
+      "name": "debug",
+      "description": "*NOT IMPLEMENTED* If true, all JavaScript logic will be executed in debug mode",
+      "in": "query",
+      "type": "boolean",
+      "allowEmptyValue": false
+    },
+    "downloadName": {
+      "name": "downloadName",
+      "description": "Used to specified download name.",
+      "in": "query",
+      "type": "string",
+      "allowEmptyValue": false
+    },
+    "pagesize": {
+      "name": "pagesize",
+      "description": "Sets the number of objects to retrieve in one batch. The default is 20. You cannot make this number smaller than 1, or larger than 5000.",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": false
+    },
+    "offset": {
+      "name": "offset",
+      "description": "This is generated internally for pagination in next_batch links. It is not recommended to set this manually, as security and JavaScript filters can make this value jump by more than pagesize for each page.",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": false
+    },
+    "deferred": {
+      "name": "deferred",
+      "description": "Comma-separated list of Resource.attribute names that will be returned as deferred links. This applies only to *BINARY* and *STRING* data. _'deferred'_ values take precedence over _'inline'_ and _'inlinelimit'_ values. The value is also used for transaction summaries, but database names must be used.",
+      "in": "query",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "inline": {
+      "name": "inline",
+      "description": "Comma-separated list of Resource.attribute names that will be returned as inline values. This applies only to *BINARY* and *STRING* data. _'deferred'_ values take precedence over _'inline'_ and _'inlinelimit'_ values. The value is also used for transaction summaries, but database names must be used.",
+      "in": "query",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "allowEmptyValue": false
+    },
+    "inlinelimit": {
+      "name": "inlinelimit",
+      "description": "Overrides the project setting. Number of characters or bytes used to decide whether a value is returned inline in the JSON or deferred to a link for *BINARY* or *STRING* data. Both _'deferred'_ and _'inline'_ take precedence over _'inlinelimit'_ values. A  value of 0 will result in ALL non-null values returned as a link. A value of -1 will result in all values returned as a link.",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": "false"
+    },
+    "procrowlimit": {
+      "name": "procrowlimit",
+      "description": "Overrides the project setting. Number of rows to return from each result set produced (if any) by a PROCEDURE. Any further rows will be discard and cannot be retrieved. A special value is returned to tell the caller if this happens",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": "false"
+    },
+    "procinlinelimit": {
+      "name": "procinlinelimit",
+      "description": "Overrides the project setting. See _'inlinelimit'_, but applies to values returned by procedure. Values exceeding this limit cannot be obtained later.",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": "false"
+    },
+    "chunksize": {
+      "name": "chunksize",
+      "description": "A specialized performance value used to control query generation for contained resources",
+      "in": "query",
+      "type": "integer",
+      "format": "int32",
+      "allowEmptyValue": "false"
+    },
+    "ignoredeleted": {
+      "name": "ignoredeleted",
+      "description": "The optional parameter 'ignoredeleted' can be added to control the response when the resource is not found. Normally, a DELETE on a non-existent resource results in a 404 - No such object error message. While this is correctly 'RESTful' and idempotent, it may not be the wanted result. For these times, 'ignoredeleted' parameter may be added. The call will still be idempotent, but will return 200 with an empty txsummary.",
+      "in": "query",
+      "type": "boolean",
+      "allowEmptyValue": true
+    }
+  },
+  "responses": {
+
+  }
+}
