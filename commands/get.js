@@ -56,6 +56,11 @@ module.exports = {
 			params += "nometa=" + cmd.nometa; 
 		}
 		
+		if (cmd.inlinelimit) {
+			params += params.length ? "&" : "?";
+			params += "inlinelimit=" + cmd.inlinelimit; 
+		}
+		
 		if (cmd.format) {
 			if (cmd.format !== "text" && cmd.format !== "json" && cmd.format !== "compactjson") {
 				console.log('Invalid value for option '.red + 'format'.blue.bgWhite + 
