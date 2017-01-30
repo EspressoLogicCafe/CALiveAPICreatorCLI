@@ -10,17 +10,17 @@ Refer to online documentation of creating and using Live API Creator [REST API](
 1. Make sure [node.js](http://nodejs.org) is installed
 2. Install using `npm` by running the following:
 ```sh
-$ npm install -g liveapicreator-cli
+$npm install -g liveapicreator-cli
 ```
 
 Note: on Unix and Mac, you will probably need to run this with sudo because of file permissions:
 
 ```sh
-$ sudo npm install -g liveapicreator-cli
+$sudo npm install -g liveapicreator-cli
 ```
 
 *Windows*: Please note that, on Windows, `npm install` will create an executable 
-called `liveapicreator` (or `lac` as a shortcut) in your
+called `lac` (or `liveapicreator`) in your
 `<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
 want to fix that, otherwise you'll have to specify the full path to the executable.
 
@@ -33,9 +33,9 @@ want to fix that, otherwise you'll have to specify the full path to the executab
 
 ## Command Line Service
 ```sh
-$ liveapicreator --help
+$lac --help
 
-  Usage: liveapicreator \[options] [command] 
+  Usage: lac [options] [command] 
 
   Commands:
 
@@ -58,7 +58,7 @@ $ liveapicreator --help
 
 ## Logon to an API Server
 ```sh
-$ liveapicreator login http://localhost:8080/rest/default/demo/v1 -u username -p mypassword
+$lac login -u username -p mypassword http://localhost:8080/rest/default/demo/v1
 Logging in...
 This server licensed to: Live API Creator
 Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
@@ -67,7 +67,7 @@ Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
 
 ## See which API server (if any) you are logged into
 ```sh
-$ liveapicreator status
+$lac status
 
 You are currently logged in to server: https://localhost:8080/rest/default/demo/v1 as user: demo
 Defined aliases:
@@ -94,7 +94,7 @@ or the server's license. The possible values for the resource are:
 * serverinfo
 
 ```sh
-$ liveapicreator describe tables
+$lac describe tables
 
 DB    Table
 ----  -------------------
@@ -108,7 +108,7 @@ demo  purchaseorder_audit
 ```
 
 ```sh
-$ liveapicreator describe tables/product
+$lac describe tables/product
 
 Name            Type     Size      PK
 --------------  -------  --------  --
@@ -140,7 +140,7 @@ full_image      BLOB     16777215
 
 ## Get a single REST endpoint (compressed format)
 ```sh
-$ liveapicreator get employee
+$lac get employee
 
 demo:employee/1 employee_id:1 login:sam name:Sam Yosemite
 demo:employee/2 employee_id:2 login:mlittlelamb name:Mary Little-Lamb
@@ -152,7 +152,7 @@ etc...
 
 ## GET a single REST endpoint (JSON format)
 ```sh
-$ liveapicreator get employee/4 -m json 
+$lac get employee/4 -m json 
 [
   {
     "@metadata": {
@@ -179,13 +179,13 @@ $ liveapicreator get employee/4 -m json
   }
 ]
 
-liveapicreator get demo:customer --userfilter "myFilter(custname:'Alpha and Sons')" --userorder "sortByName"
+$lac get demo:customer --userfilter "myFilter(custname:'Alpha and Sons')" --userorder "sortByName"
 ```
 
 ## POST (insert) a JSON payload 
 
 ```sh
-$ liveapicreator post --help
+$lac post --help
 
   Usage: post <resource> [options]
 
@@ -197,7 +197,7 @@ $ liveapicreator post --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-$ liveapicreator post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
+$lac post customer -j '{ "name": "new posted record","balance": 0,"credit_limit": 9000 }'
 
 POST for customer:
 I demo:customer/new%20posted%20record name:new posted record balance:0 credit_limit:9000
@@ -207,7 +207,7 @@ Request took: 61ms - # objects touched: 1
 ## PUT (update) a JSON Payload
 
 ```sh
-$ liveapicreator put --help
+$lac put --help
 
   Usage: put <resource> [options]
 
@@ -228,9 +228,10 @@ Request took: 42ms - # objects touched: 1
 note: you can replace the checksum value with "override" - but this overrides optimistic locking so use it wisely.
 
 ## DELETE a REST resource
+Required fields are the primary key (--pk <pkey>) and checksum (--checksum <value>)
 
 ```sh
-$ liveapicreator delete --help
+$lac delete --help
 
   Usage: delete <resource> [options]
 
@@ -248,6 +249,6 @@ liveapicreator delete customer -k "new posted record" --checksum "A:e86aea2e0a4e
 ## Logout
 
 ```sh
-$ liveapicreator logout
+$lac logout
 Logout successful
 ```
