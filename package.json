@@ -1,8 +1,8 @@
 {
-  "name": "liveapicreator-cli",
-  "version": "3.1.23",
-  "description": "The NodeJS command line utility for CA Live API Creator from CA Technologies",
-  "main": "liveapicreator.js",
+  "name": "APICreatorSDK",
+  "version": "1.4.7",
+  "description": "A rapid development node sdk for API's for CA Live API Creator REST API services.",
+  "main": "APICreatorSDK.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,14 +15,18 @@
     "command",
     "line",
     "REST",
-    "SQL",
+    "API",
+    "RESTful",
     "database",
+    "sql",
     "mysql",
     "oracle",
     "nosql",
     "postgres",
     "mongo",
     "sqlserver",
+    "db2luw",
+    "postgresql",
     "mobile",
     "reactive"
   ],

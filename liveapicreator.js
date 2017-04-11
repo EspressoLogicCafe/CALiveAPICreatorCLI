@@ -11,6 +11,7 @@ var pkg = require( path.join(__dirname, 'package.json') );
 var login = require('./commands/login.js');
 var get = require('./commands/get.js');
 var post = require('./commands/post.js');
+var putdata = require('./commands/putdata.js');
 var del = require('./commands/delete.js');
 var describe = require('./commands/describe.js');
 var dotfile = require('./util/dotfile.js');
@@ -89,6 +90,15 @@ program
 	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(del.commandDelete);
+	
+program
+	.command('putdata <resource>')
+	.description('Update a single row with an upload to a file to a named attribute (-k <key> -c <attr> -f foo.jpg)')
+	.option('-k, --pk <pk>', 'Primary key of the object to delete')
+	.option('-c, --attrname <attr>','Attribute Name to upload file content')
+	.option('-f, --file <file>', 'Name of a file to upload to a specific column')
+	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
+	.action(function(resource, cmd) { putdata.commandPost(resource, cmd, 'put'); });
 
 program
 	.command('describe <resource>')
