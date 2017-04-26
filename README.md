@@ -1,9 +1,8 @@
 
 
 # LiveAPICreatorCLI
-A Node.js command-line tool to access CA Live API Creator REST API and Logic services. 
-Refer to online documentation of creating and using Live API Creator [REST API](http://ca-doc.espressologic.com/docs/live-api) 
-
+A Node.js command-line tool to access CA Live API Creator REST API and Logic services.
+Refer to online documentation of creating and using Live API Creator [REST API](https://docops.ca.com/ca-live-api-creator/3-2/en/developing-apis) 
 
 ## Installation
 
@@ -19,7 +18,7 @@ Note: on Unix and Mac, you will probably need to run this with sudo because of f
 $sudo npm install -g liveapicreator-cli
 ```
 
-*Windows*: Please note that, on Windows, `npm install` will create an executable 
+*Windows*: Please note that, on Windows, `npm install` will create an executable
 called `lac` (or `liveapicreator`) in your
 `<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
 want to fix that, otherwise you'll have to specify the full path to the executable.
@@ -35,7 +34,7 @@ want to fix that, otherwise you'll have to specify the full path to the executab
 ```sh
 $lac --help
 
-  Usage: lac [options] [command] 
+  Usage: lac [options] [command]
 
   Commands:
 
@@ -120,9 +119,9 @@ full_image      BLOB     16777215
 ```
 
 
-## GET 
+## GET
 ```sh
-  Usage: get <resource> [options] 
+  Usage: get <resource> [options]
 
   Options:
 
@@ -152,7 +151,7 @@ etc...
 
 ## GET a single REST endpoint (JSON format)
 ```sh
-$lac get employee/4 -m json 
+$lac get employee/4 -m json
 [
   {
     "@metadata": {
@@ -182,7 +181,7 @@ $lac get employee/4 -m json
 $lac get demo:customer --userfilter "myFilter(custname:'Alpha and Sons')" --userorder "sortByName"
 ```
 
-## POST (insert) a JSON payload 
+## POST (insert) a JSON payload
 
 ```sh
 $lac post --help
@@ -218,7 +217,7 @@ $lac put --help
     -f, --jsonfile <jsonfile>        Name of a file containing JSON to be updated, or stdin to read from stdin
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
-    
+
 $ liveapicreator put customer -j '{ "@metadata": {"checksum": "A:693190f461f5402e"  }, "name": "new posted record", "credit_limit": 8000  }'
 
 PUT for customer:
@@ -244,7 +243,7 @@ $lac delete --help
     -m, --format <format>            Optional: format of output, either text (default), json or compactjson
     -a, --serverAlias <serverAlias>  Optional: alias of the server to use if other than the current default server
 
-liveapicreator delete customer -k "new posted record" --checksum "A:e86aea2e0a4e74bf" 
+liveapicreator delete customer -k "new posted record" --checksum "A:e86aea2e0a4e74bf"
 ```
 ## Logout
 
