@@ -74,7 +74,7 @@ module.exports = {
 		if (cmd.pk) {
 			objUrl += "/" + cmd.pk;
 		}
-		console.log(objUrl + params);
+		//console.log(objUrl + params);
 		var startTime = new Date();
 		client.get(url + "/" + objUrl + params, {
 			headers: {

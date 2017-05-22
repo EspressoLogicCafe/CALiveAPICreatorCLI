@@ -53,7 +53,7 @@ module.exports = {
 			console.log('Error: invalid JSON'.red + " : " + e);
 			return;
 		}
-		console.log(cmd.json);
+		//console.log(cmd.json);
 		var startTime = new Date();
 		var fullResource = resource;
 		if (cmd.pk) {
