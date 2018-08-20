@@ -1,27 +1,18 @@
 
 
 # LiveAPICreatorCLI
-A Node.js command-line tool to access CA Live API Creator REST API and Logic services.
-Refer to online documentation of creating and using Live API Creator [REST API](https://docops.ca.com/ca-live-api-creator/3-2/en/developing-apis) 
+A command-line tool to access CA Live API Creator REST API and Logic services.
+Refer to online documentation of creating and using Live API Creator [REST API](https://docops.ca.com/ca-live-api-creator/5-0/en/) 
 
 ## Installation
 
-1. Make sure [node.js](http://nodejs.org) is installed
-2. Install using `npm` by running the following:
-```sh
-$npm install -g liveapicreator-cli
+```aidl
+    git clone https://github.com/EspressoLogicCafe/liveapicreator-devops.git
+    cd liveapicreator-devops
+    
+    Select one of three directories (platform: windows, linux, and macos) and copy the 'lac' and 'lacadmin' to your
+    path where you intend to run your scripts.
 ```
-
-Note: on Unix and Mac, you will probably need to run this with sudo because of file permissions:
-
-```sh
-$sudo npm install -g liveapicreator-cli
-```
-
-*Windows*: Please note that, on Windows, `npm install` will create an executable
-called `lac` (or `liveapicreator`) in your
-`<node_modules>/.bin` directory. If this directory is not in your `PATH`, you will probably
-want to fix that, otherwise you'll have to specify the full path to the executable.
 
 
 ## Features
@@ -32,32 +23,34 @@ want to fix that, otherwise you'll have to specify the full path to the executab
 
 ## Command Line Service
 ```sh
-$lac --help
-
   Usage: lac [options] [command]
+  
+  
+    Commands:
+  
+      login [options] <url>                   Login to an API Server
+      logout [options] [url]                  Logout from the current server, or a specific server
+      use <alias>                             Use the specified server by default
+      status                                  Show the current server, and any defined server aliases
+      get [options] <resource>                Retrieve some data for the given resource/table/view
+      post [options] <resource>               Insert some data
+      put [options] <resource>                Update some data
+      delete [options] <resource>             Delete some data
+      putdata [options] <resource>            Update a single row with an upload to a file to a named attribute (-k <key> -c <attr> -f foo.jpg)
+      describe [options] <resource>           Describe the specified resource, can be: tables[/tablename], views[/viewname], resources, functions, license, serverinfo
+      schema [options] <list|swagger|export>  Administer API project options for an account.
+  
+    Options:
+  
+      -h, --help     output usage information
+      -V, --version  output the version number
 
-  Commands:
-
-    login [options]               Login to an API server
-    logout [options]              Logout from the current server, or a specific server
-    use <alias>                   Use the specified server by default
-    status                        Show the current server, and any defined server aliases
-    get <resource> [options]      Retrieve some data for the given resource/table/view
-    post <resource> [options]     Insert some data
-    put <resource> [options]      Update some data
-    delete <resource> [options]   Delete some data
-    describe <resource> [options] Describe the specified resource, can be: tables[/tablename], views[/viewname], procedures, resources, license, serverinfo
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
 
 ```
 
 ## Logon to an API Server
 ```sh
-$lac login -u username -p mypassword http://localhost:8080/rest/default/demo/v1
+$lac login -u demouser -p mypassword http://localhost:8080/rest/default/demo/v1
 Logging in...
 This server licensed to: Live API Creator
 Login successful, API key will expire on: 2015-11-18T15:03:37.342Z
@@ -139,7 +132,7 @@ full_image      BLOB     16777215
 
 ## Get a single REST endpoint (compressed format)
 ```sh
-$lac get employee
+$lac get demo:employee
 
 demo:employee/1 employee_id:1 login:sam name:Sam Yosemite
 demo:employee/2 employee_id:2 login:mlittlelamb name:Mary Little-Lamb

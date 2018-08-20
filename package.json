@@ -1,7 +1,7 @@
 {
   "name": "liveapicreator-cli",
-  "version": "3.1.26",
-  "description": "The NodeJS command line utility for CA Live API Creator from CA Technologies",
+  "version": "5.0.1",
+  "description": "A REST command line utility for CA Live API Creator from CA Technologies",
   "main": "liveapicreator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -51,6 +51,18 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/EspressoLogicCafe/CALiveAPICreatorCLI.git"
+  },
+  "pkg": {
+   "scripts": [
+   		"commands/**/*.js",
+   		"util/**/*.js"
+   		],
+    "assets": [
+      "views/**/*"
+    ],
+    "targets": [
+      "node7"
+    ]
   },
   "bugs": {
     "url": "https://github.com/EspressoLogicCafe/CALiveAPICreatorCLI.git/issues"

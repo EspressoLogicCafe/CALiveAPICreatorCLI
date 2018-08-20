@@ -8,7 +8,6 @@ module.exports = {
 	
 	// Get the name of the dot directory.
 	getDotDirectory: function(createIfNotExists) {
-		//console.log("getDotDirectory = "+createIfNotExists);
 		var dotDirName = osenv.home() + "/.liveapicreator";
 		if ( ! fs.existsSync(dotDirName)) {
 			if (createIfNotExists) {
@@ -58,7 +57,6 @@ module.exports = {
 	// Delete the dot file for the given alias.
 	// Return true if successful, false otherwise
 	deleteDotFileForAlias: function(alias) {
-		//console.log("deleteDotFileForAlias = "+ alias);
 		var dotFile = this.getDotFileForAlias(alias);
 		if ( ! dotFile) {
 			return false;
@@ -68,7 +66,6 @@ module.exports = {
 	},
 	
 	getDotFileForAlias: function(alias) {
-		//console.log("getDotFileForAlias = "+ alias);
 		var dotDirName = this.getDotDirectory(false);
 		if ( ! dotDirName) {
 			return null;
@@ -148,6 +145,15 @@ module.exports = {
 	unsetCurrentServer: function() {
 		var dotDirName = this.getDotDirectory();
 		var dotFileName = dotDirName + "/currentServer.txt";
-		fs.unlinkSync(dotFileName);
+		if (dotDirName) {
+			if ( ! fs.existsSync(dotFileName)) {
+				 //console.log("not logged into a server");
+				 return null;
+			}
+			fs.unlinkSync(dotFileName,function(err){
+				if(err) {console.log("not logged into a server")};
+			});
+		}
+	
 	}
 };

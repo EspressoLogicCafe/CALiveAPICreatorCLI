@@ -6,8 +6,7 @@
 
 var program = require('commander');
 var path = require('path');
-var pkg = require( path.join(__dirname, 'package.json') );
-
+var pkg = require('./package.json');
 var login = require('./commands/login.js');
 var get = require('./commands/get.js');
 var post = require('./commands/post.js');
