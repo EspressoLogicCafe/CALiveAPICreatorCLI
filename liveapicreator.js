@@ -55,7 +55,8 @@ program
 	.option('-o, --offset <offset>', 'Optional: offset for starting next batch')
 	.option('-n, --nometa <true>', 'Optional: If true, no @metadata will be returned')
 	.option('-i, --inlinelimit <inlinelimit>', 'Optional: For BLOB and CLOB image size default: 2000')
-	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
+	.option('-m, --format <format>', 'Optional: format of output in json only')
+	.option('--output <filename>', 'Optional: name of output file to write get results')
 	.option('--truncate <length>', 'Optional: truncate values at this many characters (default 20)')
 	.option('-j, --jsonfile <filename>', 'Name of file to write JSON output')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
@@ -63,39 +64,41 @@ program
 
 program
 	.command('post <resource>')
-	.description('Insert some data')
-	.option('-j, --json <json>', 'JSON for the data being inserted')
+	.description('Insert json data to <resource> endpoint')
+	.option('-j, --json <json>', 'JSON string in quotes ' + "'{a: 1, b: 'c'}'" + ' for the data being inserted ')
 	.option('-f, --jsonfile <jsonfile>', 'Name of a file containing JSON to be inserted, or stdin to read from stdin')
-	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
+	.option('-m, --format <format>', 'Optional: format of output in json format')
+	.option('--output <filename>', 'Optional: name of output file to write post results')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(function(resource, cmd) { post.commandPost(resource, cmd, 'post'); });
 
 program
 	.command('put <resource>')
-	.description('Update some data')
+	.description('Update json data to <resource> endpoint')
 	.option('-k, --pk <pk>', 'Primary key of the table or resource')
-	.option('-j, --json <json>', 'JSON string for the data being updated')
+	.option('-j, --json <json>', 'JSON string in quotes ' + "'{a: 1, b: 'c'}'" + ' for the data being updated ')
 	.option('-f, --jsonfile <jsonfile>', 'Name of a file containing JSON to be updated, or stdin to read from stdin')
-	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
+	.option('--output <filename>', 'Optional: name of output file to write put results')
+	.option('-m, --format <format>', 'Optional: format of output, in json format')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(function(resource, cmd) { post.commandPost(resource, cmd, 'put'); });
 
 program
 	.command('delete <resource>')
-	.description('Delete some data')
-	.option('-k, --pk <pk>', 'Primary key of the object to delete')
-	.option('--checksum <checksum>', 'Optional: checksum for the object to delete, or "override". If not specified, the object will be retrieved then deleted.')
-	.option('-f, --jsonfile <jsonfile>', 'Optional: name of a file containing JSON to be deleted, or stdin to read from stdin')
-	.option('-m, --format <format>', 'Optional: format of output, either text (default), json or compactjson')
+	.description('Delete a single row using primary key and checksum')
+	.option('-k, --pk <pk>', 'Required: Primary key of the object to delete')
+	.option('-c, --checksum <checksum>', 'Required: checksum for the object to delete, or "override". If not specified, the object will be retrieved then deleted.')
+	.option('-m, --format <format>', 'Optional: format of output, in json format')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(del.commandDelete);
 	
 program
 	.command('putdata <resource>')
-	.description('Update a single row with an upload to a file to a named attribute (-k <key> -c <attr> -f foo.jpg)')
-	.option('-k, --pk <pk>', 'Primary key of the object to delete')
-	.option('-c, --attrname <attr>','Attribute Name to upload file content')
+	.description('Update a single row/column with an upload using a file  (-k <key> -c <attr> -f foo.jpg)')
+	.option('-k, --pk <pk>', 'Required: Primary key of the object to delete')
+	.option('-c, --attrname <attr>','Required: Attribute Name to upload file content')
 	.option('-f, --file <file>', 'Name of a file to upload to a specific column')
+	.option('--output <filename>', 'Optional: name of output file to write putdata results')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(function(resource, cmd) { putdata.commandPost(resource, cmd, 'put'); });
 
@@ -107,7 +110,7 @@ program
 
 
 program
-	.command('schema <list|swagger|export>')
+	.command('schema <list|openapi|export>')
 	.description('Administer API project options for an account.')
 	.option('--prefix [name]','This is the datasource prefix for @schema')
 	.option('--project_ident [project_ident]','The project ident that will be marked as used' )

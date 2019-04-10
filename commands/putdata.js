@@ -90,7 +90,7 @@ module.exports = {
 				//console.log(putData);
 			
 				var endTime = new Date();
-				if (data.errorMessage) {
+				if (putData.errorMessage) {
 					console.log(("Error: " + putData.errorMessage).red);
 					return;
 				}
@@ -119,6 +119,12 @@ module.exports = {
 						trailer += " ";
 					console.log(trailer.bgWhite.blue);
 					console.log(' '.reset);
+					if(cmd.output) {
+						var filename = cmd.output;
+						var exportFile = fs.openSync(filename, 'w+', 0600);
+						fs.writeSync(exportFile, JSON.stringify(putData, null, 2));
+						console.log(('PUT DATA request has been exported to file: ' + filename).green);
+					}
 				}
 			});
 		});

@@ -15,8 +15,8 @@ module.exports = {
 		else if (action === 'export') {
 			module.exports.export(cmd);
 		}
-		else if (action === 'swagger') {
-			module.exports.swagger(cmd);
+		else if (action === 'openapi') {
+			module.exports.openapi(cmd);
 		}
 		else {
 			console.log('You must specify an action: list, swagger, or export');
@@ -109,7 +109,7 @@ module.exports = {
 			}
 		});
 	},
-	swagger: function(cmd) {
+	openapi: function(cmd) {
 		var client = new Client();
 		
 		var loginInfo = login.login(cmd);

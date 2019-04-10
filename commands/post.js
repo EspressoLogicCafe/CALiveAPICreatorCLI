@@ -109,6 +109,12 @@ module.exports = {
 				console.log(trailer.bgWhite.blue);
 				console.log(' '.reset);
 			}
+			if(cmd.output) {
+				var filename = cmd.output;
+				var exportFile = fs.openSync(filename, 'w+', 0600);
+				fs.writeSync(exportFile, JSON.stringify(data, null, 2));
+				console.log(('POST request has been exported to file: ' + filename).green);
+			}
 		});
 	}
 };
