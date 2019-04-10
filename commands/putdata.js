@@ -12,44 +12,42 @@ module.exports = {
 		var apiKey = null;
 		if (cmd.serverAlias) {
 			var login = dotfile.getLoginForAlias(cmd.serverAlias);
-			if ( ! login) {
+			if (!login) {
 				console.log(('Unknown alias: ' + cmd.serverAlias).red);
 				return;
 			}
 			url = login.url;
 			apiKey = login.loginInfo.apikey;
-		}
-		else {
+		} else {
 			var login = dotfile.getCurrentServer();
 			url = login.url;
 			apiKey = dotfile.getApiKey(login.url, login.userName);
 		}
-		if ( ! resource) {
+		if (!resource) {
 			console.log('Error: a resource or entity name must be specified'.red);
 			return;
 		}
-		if (  !cmd.file) {
+		if (!cmd.file) {
 			console.log('Error: a file object must be specified with the -f/--file option'.red);
 			return;
 		}
-		
+
 		if (cmd.file) {
 			if (cmd.file === 'stdin') {
 				cmd.file = '/dev/stdin';
-			}
-			else {
-				if ( ! fs.existsSync(cmd.file)) {
+			} else {
+				if (!fs.existsSync(cmd.file)) {
 					console.log('Unable to open file: '.red + cmd.file.magenta);
 					return;
 				}
 			}
 			var fileContent = fs.readFileSync(cmd.file);
 			var data = fileContent.toString('base64');//hex
-			var code  = "b64:" + data;//"0x"+data; //
+			var code = "b64:" + data;//"0x"+data; //
 		}
-		
-		if(!cmd.attrname) {
-			console.log('Missing Attribute Name --attrname : '.red );
+
+		if (!cmd.attrname) {
+			console.log('Missing Attribute Name --attrname : '.red);
 			return;
 		}
 		var startTime = new Date();
@@ -57,23 +55,23 @@ module.exports = {
 		if (cmd.pk) {
 			fullResource += "/" + cmd.pk;
 		} else {
-			console.log('Missing Primary Key --pk : '.red );
+			console.log('Missing Primary Key --pk : '.red);
 			return;
 		}
-		client.get(url + "/" + fullResource , {
+		client.get(url + "/" + fullResource, {
 			headers: {
 				Authorization: "CALiveAPICreator " + apiKey + ":1",
 				"Content-Type": "application/json"
 			}
-		}, function(data) {
-		
+		}, function (data) {
+
 			var endTime = new Date();
 			if (data.errorMessage) {
 				console.log(("Error: " + data.errorMessage).red);
 				return;
 			}
-			if(data.length < 1) {
-				console.log(("Error: Primary Key [" + cmd.pk + "] did not return any row data" ).red);
+			if (data.length < 1) {
+				console.log(("Error: Primary Key [" + cmd.pk + "] did not return any row data").red);
 				return;
 			}
 			var putJson = {};
@@ -86,13 +84,19 @@ module.exports = {
 					Authorization: "CALiveAPICreator " + apiKey + ":1",
 					"Content-Type": "application/json"
 				}
-			}, function(putData) {
+			}, function (putData) {
 				//console.log(putData);
-			
+
 				var endTime = new Date();
 				if (putData.errorMessage) {
 					console.log(("Error: " + putData.errorMessage).red);
 					return;
+				}
+				if (cmd.output) {
+					var filename = cmd.output;
+					var exportFile = fs.openSync(filename, 'w+', 0600);
+					fs.writeSync(exportFile, JSON.stringify(putData, null, 2));
+					console.log(('PUT DATA request has been exported to file: ' + filename).green);
 				}
 				var termWidth = 80;
 				if (process.stdout.getWindowSize) { // May be null if output is redirected
@@ -101,12 +105,12 @@ module.exports = {
 
 				if (!cmd.format || cmd.format === "text") {
 					var header = verb.toUpperCase() + " for " + resource + ": ";
-					while (header.length < termWidth )
+					while (header.length < termWidth)
 						header += " ";
 					console.log(header.bgWhite.blue);
-				}				
+				}
 				//console.log(JSON.stringify(putData, null, 2));
-			
+
 				if (!cmd.format || cmd.format === "text") {
 					var trailer = "Request took: " + (endTime - startTime) + "ms";
 					trailer += " - # objects touched: ";
@@ -119,12 +123,6 @@ module.exports = {
 						trailer += " ";
 					console.log(trailer.bgWhite.blue);
 					console.log(' '.reset);
-					if(cmd.output) {
-						var filename = cmd.output;
-						var exportFile = fs.openSync(filename, 'w+', 0600);
-						fs.writeSync(exportFile, JSON.stringify(putData, null, 2));
-						console.log(('PUT DATA request has been exported to file: ' + filename).green);
-					}
 				}
 			});
 		});

@@ -56,7 +56,6 @@ program
 	.option('-n, --nometa <true>', 'Optional: If true, no @metadata will be returned')
 	.option('-i, --inlinelimit <inlinelimit>', 'Optional: For BLOB and CLOB image size default: 2000')
 	.option('-m, --format <format>', 'Optional: format of output in json only')
-	.option('--output <filename>', 'Optional: name of output file to write get results')
 	.option('--truncate <length>', 'Optional: truncate values at this many characters (default 20)')
 	.option('-j, --jsonfile <filename>', 'Name of file to write JSON output')
 	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
@@ -69,7 +68,7 @@ program
 	.option('-f, --jsonfile <jsonfile>', 'Name of a file containing JSON to be inserted, or stdin to read from stdin')
 	.option('-m, --format <format>', 'Optional: format of output in json format')
 	.option('--output <filename>', 'Optional: name of output file to write post results')
-	.option('-a, --serverAlias <serverAlias>', 'Optional: alias of the server to use if other than the current default server')
+	.option('-a, --serverAlias <serveralias>', 'Optional: alias of the server to use if other than the current default server')
 	.action(function(resource, cmd) { post.commandPost(resource, cmd, 'post'); });
 
 program
@@ -114,7 +113,7 @@ program
 	.description('Administer API project options for an account.')
 	.option('--prefix [name]','This is the datasource prefix for @schema')
 	.option('--project_ident [project_ident]','The project ident that will be marked as used' )
-	.option('--file [fileName]', '[Optional] Name of file to settings for import/export (if not provided stdin/stdout used for export)')
+	.option('--file [filename]', '[Optional] Name of file to settings for import/export (if not provided stdin/stdout used for export)')
 	.action(schema.doSchema);
 
 program.parse(process.argv);
