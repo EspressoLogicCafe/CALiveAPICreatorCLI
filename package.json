@@ -1,6 +1,6 @@
 {
   "name": "liveapicreator-cli",
-  "version": "5.2.0.1",
+  "version": "5.2.2",
   "description": "A REST command line utility for CA Live API Creator from CA Technologies",
   "main": "liveapicreator.js",
   "scripts": {

@@ -38,10 +38,21 @@ module.exports = {
 		}
 		
 		client.get(url + "/@license", function(data) {
-			if (typeof data === "string") {
+			var company;
+			var license_type;
+			var isPLA = false;
+			if (data) {
 				try {
-					
-					data = JSON.parse(data);
+					if(typeof data === 'string') {
+						data = JSON.parse(data);
+					}
+					company = data.company;
+					license_type =  data.license_type;
+					isPLA = data && 1 === data.pla_enabled;
+					if (isPLA) {
+						company = data.domain_name;
+						license_type = "Portfolio License Agreement Enabled " + data.site_id;
+					}
 				}
 				catch(e) {
 					console.log(data);
@@ -58,8 +69,10 @@ module.exports = {
 				return;
 			}
 					
-			console.log(("This server licensed to: " + data.company + " license_type: "+ data.license_type).green);
-			console.log(("License will expire: "+ data.license_expiration).green); 
+			console.log(("This server licensed to: " + company + " license_type: "+ license_type).green);
+			if (!isPLA) {
+				console.log(("License will expire: " + data.license_expiration).green);
+			}
 			process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 			client.post(url + "/@authentication",
 				{
