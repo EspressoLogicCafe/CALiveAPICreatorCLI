@@ -1,8 +1,8 @@
 
 
 # LiveAPICreatorCLI
-A command-line tool to access CA Live API Creator REST API and Logic services.
-Refer to online documentation of creating and using Live API Creator [REST API](https://docops.ca.com/ca-live-api-creator/5-0/en/) 
+A command-line tool to access Layer7 Live API Creator REST API and Logic services.
+Refer to online documentation of creating and using Live API Creator [REST API](https://docops.ca.com/ca-live-api-creator/5-2/en/) 
 
 ## Installation
 
